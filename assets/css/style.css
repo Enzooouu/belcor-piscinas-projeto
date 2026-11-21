@@ -884,12 +884,12 @@ button, input { font: inherit; color: inherit; }
   bottom: calc(16px + env(safe-area-inset-bottom));
   width: 60px; height: 60px; border-radius: 50%;
   display: grid; place-items: center;
-  background: #25d366; color: #fff;
+  background: var(--royal); color: #fff;
   box-shadow: 0 8px 24px rgba(6, 24, 34, .3); /* taste-skill-ignore: botão flutuante de verdade */
   transition: transform var(--dur) var(--ease-out), opacity .3s ease;
 }
 .wa-float svg { width: 32px; height: 32px; }
-.wa-float:hover { transform: scale(1.07); }
+.wa-float:hover { transform: scale(1.07); background: var(--accent-hover); }
 .wa-float:active { transform: scale(.95); }
 .wa-float:focus-visible { outline: 3px solid var(--ink); outline-offset: 4px; border-radius: 50%; }
 .js .wa-float.is-hidden { opacity: 0; transform: scale(.6); pointer-events: none; }

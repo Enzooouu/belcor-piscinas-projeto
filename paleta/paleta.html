@@ -1,0 +1,49 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0}
+body{width:1600px;padding:72px;background:#f3f7fa;font-family:"Hanken Grotesk",sans-serif;color:#062f4b}
+header{display:flex;align-items:center;justify-content:space-between;margin-bottom:48px}
+h1{font-size:64px;font-weight:500;letter-spacing:-.045em;line-height:1}
+header p{font-size:20px;color:#3d5a70;margin-top:12px}
+header img{height:88px}
+h2{font-size:22px;font-weight:600;margin:40px 0 16px}
+.row{display:grid;gap:16px}
+.r3{grid-template-columns:repeat(3,1fr)} .r4{grid-template-columns:repeat(4,1fr)}
+.sw{border-radius:22px;padding:8px;background:#fff}
+.chip{height:150px;border-radius:14px}
+.big .chip{height:200px}
+.meta{padding:14px 10px 8px}
+.name{font-weight:600;font-size:20px}
+.hex{font-size:17px;color:#3d5a70;margin-top:2px}
+.use{font-size:15px;color:#3d5a70;margin-top:6px;line-height:1.4}
+.bar{display:flex;height:56px;border-radius:16px;overflow:hidden;margin-top:12px}
+</style></head><body>
+<header><div><h1>Paleta de cores</h1><p>Belcor Piscinas · cores tiradas do logo</p></div><img src="../logo/belcor-logo-azul.svg" alt=""></header>
+
+<h2>Base</h2>
+<div class="row r3 big">
+ <div class="sw"><div class="chip" style="background:#013b5e"></div><div class="meta"><p class="name">Azul-marinho</p><p class="hex">#013B5E</p><p class="use">Fundo do logo e das seções escuras (antes e depois, passo a passo)</p></div></div>
+ <div class="sw"><div class="chip" style="background:#f3f7fa;box-shadow:inset 0 0 0 1px #dde8ef"></div><div class="meta"><p class="name">Fundo claro</p><p class="hex">#F3F7FA</p><p class="use">Fundo da página</p></div></div>
+ <div class="sw"><div class="chip" style="background:#062f4b"></div><div class="meta"><p class="name">Texto</p><p class="hex">#062F4B</p><p class="use">Títulos e textos</p></div></div>
+</div>
+
+<h2>As quatro faixas do logo</h2>
+<div class="row r4">
+ <div class="sw"><div class="chip" style="background:#48e0fa"></div><div class="meta"><p class="name">Ciano</p><p class="hex">#48E0FA</p><p class="use">Faixa 1, detalhes</p></div></div>
+ <div class="sw"><div class="chip" style="background:#92f7fe"></div><div class="meta"><p class="name">Água</p><p class="hex">#92F7FE</p><p class="use">Faixa 2, destaques sobre o azul-marinho</p></div></div>
+ <div class="sw"><div class="chip" style="background:#a3bae4"></div><div class="meta"><p class="name">Lavanda</p><p class="hex">#A3BAE4</p><p class="use">Faixa 3</p></div></div>
+ <div class="sw"><div class="chip" style="background:#2252bf"></div><div class="meta"><p class="name">Azul royal</p><p class="hex">#2252BF</p><p class="use">Faixa 4 e cor de ação: botões e WhatsApp</p></div></div>
+</div>
+
+<h2>Apoio</h2>
+<div class="row r4">
+ <div class="sw"><div class="chip" style="background:#e4f1f8"></div><div class="meta"><p class="name">Azul bem claro</p><p class="hex">#E4F1F8</p><p class="use">Cartões e campos</p></div></div>
+ <div class="sw"><div class="chip" style="background:#ffffff;box-shadow:inset 0 0 0 1px #dde8ef"></div><div class="meta"><p class="name">Branco</p><p class="hex">#FFFFFF</p><p class="use">Cabeçalho, painéis</p></div></div>
+ <div class="sw"><div class="chip" style="background:#3d5a70"></div><div class="meta"><p class="name">Texto secundário</p><p class="hex">#3D5A70</p><p class="use">Rótulos e notas</p></div></div>
+ <div class="sw"><div class="chip" style="background:#f5d84a"></div><div class="meta"><p class="name">Amarelo do lema</p><p class="hex">#F5D84A</p><p class="use">Só nas estrelas da avaliação</p></div></div>
+</div>
+
+<h2>Proporção no site</h2>
+<div class="bar"><div style="flex:55;background:#f3f7fa;box-shadow:inset 0 0 0 1px #dde8ef"></div><div style="flex:22;background:#013b5e"></div><div style="flex:10;background:#e4f1f8"></div><div style="flex:6;background:#2252bf"></div><div style="flex:2;background:#48e0fa"></div><div style="flex:2;background:#92f7fe"></div><div style="flex:2;background:#a3bae4"></div><div style="flex:1;background:#f5d84a"></div></div>
+</body></html>
