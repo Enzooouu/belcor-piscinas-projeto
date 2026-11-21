@@ -45,7 +45,7 @@ Todos os pontos estão marcados no `index.html` com comentários `TROCAR`.
 | Estampas de vinil | `index.html`, padrões `p-…` e amostras `.swatch` | São 8 desenhos **ilustrativos** com nomes genéricos. Troque pelo catálogo real: pode ser uma foto de cada amostra no lugar do desenho. |
 | Foto real de obra por estampa | `index.html`, amostras `.swatch` | Coloque `data-obra="assets/img/obras/nome.webp"` no `<input>` da amostra e a foto da obra aparece no lugar da piscina desenhada. |
 | Cores da marca | `assets/css/style.css`, bloco `:root` | Tiradas do logo: azul-marinho #013b5e, as quatro faixas (#48e0fa, #92f7fe, #a3bae4, #2252bf) e o amarelo do lema nas estrelas. |
-| Avaliações do Google | `index.html`, seção `avaliacoes` | A fileira que rola tem 6 espaços com texto provisório. Troque pelos textos e nomes reais, nas duas listas (a segunda é a cópia que fecha o laço). |
+| Avaliações do Google | `index.html`, seção `avaliacoes` | A fileira que rola tem 6 cartões com texto provisório. Troque iniciais, nome, texto e data pelas avaliações reais, nas duas listas (a segunda é a cópia que fecha o laço). |
 
 Ao trocar uma foto, salve em `.webp` com qualidade de 60 a 75 para o site continuar leve.
 

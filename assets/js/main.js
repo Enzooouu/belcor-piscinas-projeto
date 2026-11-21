@@ -236,7 +236,7 @@
     const apply = () => {
       obra.style.setProperty('--tilt', tilt + 'deg');
       obra.style.setProperty('--yaw', yaw + 'deg');
-      const moved = Math.abs(tilt - TILT0) > 1 || Math.abs(yaw - YAW0) > 1;
+      const moved = Math.abs(tilt - TILT0) > 1 || Math.abs(yaw % 360) > 1;
       if (reset) reset.hidden = !moved;
     };
     obra.addEventListener('pointerdown', (e) => {
@@ -253,7 +253,7 @@
         if (Math.abs(dy) > Math.abs(dx)) { drag = null; return; }
         drag.decided = true; obra.setPointerCapture(e.pointerId); obra.classList.add('is-dragging');
       }
-      yaw = clamp(drag.yaw + dx * 0.35, -180, 180);
+      yaw = drag.yaw + dx * 0.35; // gira sem limite, para os dois lados
       if (e.pointerType === 'mouse') tilt = clamp(drag.tilt - dy * 0.25, 28, 70);
       obra.classList.add('has-moved');
       apply();
@@ -267,10 +267,11 @@
     obra.addEventListener('keydown', (e) => {
       const k = { ArrowLeft: [0, -10], ArrowRight: [0, 10], ArrowUp: [4, 0], ArrowDown: [-4, 0] }[e.key];
       if (!k) return;
-      e.preventDefault(); tilt = clamp(tilt + k[0], 28, 70); yaw = clamp(yaw + k[1], -180, 180);
+      e.preventDefault(); tilt = clamp(tilt + k[0], 28, 70); yaw = yaw + k[1];
       obra.classList.add('has-moved'); apply();
     });
-    if (reset) reset.addEventListener('click', () => { tilt = TILT0; yaw = YAW0; apply(); });
+    // volta pelo caminho mais curto, sem dar várias voltas
+    if (reset) reset.addEventListener('click', () => { tilt = TILT0; yaw = Math.round(yaw / 360) * 360; apply(); setTimeout(() => { yaw = YAW0; obra.classList.add('is-dragging'); apply(); requestAnimationFrame(() => obra.classList.remove('is-dragging')); }, 950); });
   }
 
   /* ---------- Fotos: clique para ampliar, com opção de zoom ---------- */
@@ -324,6 +325,19 @@
     // clicar fora da foto fecha
     $('[data-lb-stage]', lb).addEventListener('click', (e) => { if (e.target === e.currentTarget) lb.close(); });
     lb.addEventListener('close', () => { setZoom(false); if (opener) opener.focus(); });
+  }
+
+  /* ---------- Aberto agora? (horário de Sorocaba) ---------- */
+  const status = $('[data-open-status]');
+  if (status) {
+    const parts = new Intl.DateTimeFormat('en-US', { timeZone: 'America/Sao_Paulo', weekday: 'short', hour: 'numeric', minute: 'numeric', hour12: false }).formatToParts(new Date());
+    const get = (t) => (parts.find(p => p.type === t) || {}).value;
+    const day = get('weekday'); const mins = (parseInt(get('hour'), 10) % 24) * 60 + parseInt(get('minute'), 10);
+    const close = { Mon: 17, Tue: 17, Wed: 17, Thu: 17, Fri: 17, Sat: 12 }[day];
+    const open = close && mins >= 8 * 60 && mins < close * 60;
+    $('[data-open-text]', status).textContent = open ? `Aberto agora, até ${close}h` : 'Fechado agora. Deixe sua mensagem no WhatsApp';
+    status.classList.toggle('is-closed', !open);
+    status.hidden = false;
   }
 
   /* ---------- Ano no rodapé ---------- */
