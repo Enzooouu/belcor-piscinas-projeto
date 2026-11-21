@@ -41,7 +41,7 @@ Todos os pontos estão marcados no `index.html` com comentários `TROCAR`.
 | Antes / depois | `assets/img/antes.webp`, `assets/img/depois.webp` | 1400 × 900, **as duas tiradas do mesmo ângulo**. Hoje o "antes" é uma simulação feita a partir da foto do "depois", e por isso a legenda diz "Exemplo ilustrativo". |
 | Fotos do passo a passo | `lazer.webp`, `vinil.webp`, `estampa.webp`, `area.webp` | de preferência fotos de obras da Belcor |
 | Imagem de compartilhamento | `assets/img/og.jpg` | 1200 × 630, aparece quando o link é enviado no WhatsApp |
-| Logotipo | `assets/img/logo-belcor.webp` | Recortado da arte enviada pela Belcor, com fundo transparente. Troque pela versão vetorial oficial (SVG) quando houver. |
+| Logotipo | `assets/img/logo-belcor.svg` | Redesenhado em vetor a partir da arte da Belcor (veja a seção Logo abaixo). |
 | Estampas de vinil | `index.html`, padrões `p-…` e amostras `.swatch` | São 8 desenhos **ilustrativos** com nomes genéricos. Troque pelo catálogo real: pode ser uma foto de cada amostra no lugar do desenho. |
 | Foto real de obra por estampa | `index.html`, amostras `.swatch` | Coloque `data-obra="assets/img/obras/nome.webp"` no `<input>` da amostra e a foto da obra aparece no lugar da piscina desenhada. |
 | Cores da marca | `assets/css/style.css`, bloco `:root` | Tiradas do logo: azul-marinho #013b5e, as quatro faixas (#48e0fa, #92f7fe, #a3bae4, #2252bf) e o amarelo do lema nas estrelas. |
@@ -69,3 +69,17 @@ Todas são do [Unsplash](https://unsplash.com/license), de uso livre. Nenhuma mo
 Só informações públicas da empresa: nome, lema, serviços, área atendida, endereço, WhatsApp, horário, Instagram e a nota 5,0 com 61 avaliações no Google (com os pontos elogiados). Não há anos de mercado, número de obras, prêmios nem depoimentos.
 
 Os textos que descrevem as etapas (por exemplo, "a equipe vai até o local para medir") são uma suposição razoável do processo. Confirme com o dono antes de publicar.
+
+## Logo
+
+O logo foi redesenhado em vetor a partir da arte enviada pela Belcor. As quatro faixas têm as mesmas proporções e cores do original, e o nome usa a fonte **Satisfy** (Google Fonts, licença livre), convertida em contornos, então o arquivo não depende de fonte instalada.
+
+| Arquivo | Uso |
+| --- | --- |
+| `logo/belcor-logo-branco.svg` | vetor, nome em branco, para fundo escuro (é o que o site usa) |
+| `logo/belcor-logo-azul.svg` | vetor, nome em azul-marinho, para fundo claro |
+| `logo/belcor-logo-branco.png` | 3000 px, fundo transparente |
+| `logo/belcor-logo-azul.png` | 3000 px, fundo transparente |
+| `logo/belcor-logo-branco-fundo-azul.png` | 3600 px, já com o fundo azul-marinho #013b5e |
+
+Cores: #48e0fa, #92f7fe, #a3bae4, #2252bf e o fundo #013b5e.
