@@ -718,10 +718,11 @@ button, input { font: inherit; color: inherit; }
 .rating-score { display: grid; justify-items: stretch; gap: 18px; justify-self: start; }
 .score { font-size: clamp(6rem, 3rem + 9vw, 11rem); font-weight: 500; line-height: .8; letter-spacing: -0.06em; color: var(--navy); }
 .stars-lg { width: 100%; height: 40px; }
-.rating-copy { display: grid; gap: 20px; justify-items: start; max-width: 720px; }
+.rating-copy { display: grid; gap: 20px; justify-items: start; }
+.rating-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 28px; margin-top: 8px; }
 .rating-copy .h-section { max-width: none; font-size: clamp(2.5rem, 1.4rem + 3vw, 4.25rem); }
 @media (min-width: 900px) { .rating-copy .h-section { white-space: nowrap; } }
-.rating-copy .lead { margin-top: 0; max-width: 34ch; }
+.rating-copy .lead { margin-top: 0; max-width: 46ch; }
 .rating-insta { color: var(--ink); }
 
 /* a fileira vai de uma borda da tela à outra, como uma faixa de cartões passando */
@@ -750,8 +751,10 @@ button, input { font: inherit; color: inherit; }
 @keyframes reviews-roll { from { transform: translateX(-50%); } to { transform: translateX(0); } }
 
 @media (min-width: 900px) {
-  .rating-head { display: flex; justify-content: center; align-items: center; gap: clamp(48px, 6vw, 96px); }
-  .rating-score { justify-self: auto; }
+  /* nota e estrelas à esquerda; título e texto à direita; botão e Instagram lado a lado embaixo */
+  .rating-head { grid-template-columns: repeat(12, 1fr); column-gap: 24px; align-items: center; }
+  .rating-score { grid-column: 1 / span 4; justify-self: center; }
+  .rating-copy { grid-column: 5 / -1; }
 }
 @media (prefers-reduced-motion: reduce) {
   .reviews { overflow-x: auto; }
@@ -810,7 +813,7 @@ button, input { font: inherit; color: inherit; }
 .to-top { justify-self: start; display: inline-flex; align-items: center; min-height: 44px; font-weight: 600; color: var(--royal); }
 .footer-title { margin-top: clamp(48px, 6vw, 88px); font-size: var(--step-lead); font-weight: 500; letter-spacing: -0.02em; line-height: 1.2; position: relative; z-index: 1; }
 .footer-phone {
-  display: block; margin-top: .18em;
+  display: inline-block; justify-self: start; margin-top: .18em;
   font-size: clamp(2.75rem, 12.4vw, 13rem);
   font-weight: 500; letter-spacing: -0.06em; line-height: .95; white-space: nowrap;
   text-decoration: none; color: var(--navy);
