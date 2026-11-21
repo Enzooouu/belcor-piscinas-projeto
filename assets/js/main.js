@@ -131,25 +131,34 @@
   // Atalhos dos cartões de serviço: já marcam o serviço no simulador
   $$('[data-service]').forEach(a => a.addEventListener('click', () => selectRadio('servico', a.dataset.service)));
 
-  /* ---------- Estampas: provador ---------- */
-  const poolFill = $('[data-pool-fill]');
-  const poolFloor = poolFill && poolFill.ownerSVGElement;
+  /* ---------- Estampas: a obra pronta com a estampa escolhida ---------- */
+  const obra = $('[data-obra]');
+  const poolFills = $$('[data-pool-fill]');
   const poolName = $('[data-pool-name]');
   const poolDesc = $('[data-pool-desc]');
-  let swapTimer;
+  const obraPhoto = $('[data-obra-photo]');
+  const obraCaption = $('[data-obra-caption]');
+  let swapTimer, settleTimer;
   $$('input[name="estampa-galeria"]').forEach(input => {
     input.addEventListener('change', () => {
-      if (!input.checked || !poolFill) return;
+      if (!input.checked || !obra) return;
       const apply = () => {
-        poolFill.setAttribute('fill', `url(#${input.dataset.pattern})`);
+        poolFills.forEach(r => r.setAttribute('fill', `url(#${input.dataset.pattern})`));
         poolName.textContent = input.value;
         poolDesc.textContent = input.dataset.desc;
-        poolFloor.classList.remove('is-swapping');
+        if (obraCaption) obraCaption.textContent = `Piscina pronta revestida com a estampa ${input.value}`;
+        // foto real de obra, quando existir (data-obra na amostra)
+        if (obraPhoto) {
+          if (input.dataset.obra) { obraPhoto.src = input.dataset.obra; obraPhoto.alt = `Obra da Belcor com a estampa ${input.value}`; obraPhoto.hidden = false; }
+          else obraPhoto.hidden = true;
+        }
       };
-      clearTimeout(swapTimer);
+      clearTimeout(swapTimer); clearTimeout(settleTimer);
       if (reduceMotion) { apply(); return; }
-      poolFloor.classList.add('is-swapping');
-      swapTimer = setTimeout(apply, 180);
+      // a água baixa, o revestimento troca e a piscina enche de novo
+      obra.classList.add('is-changing');
+      swapTimer = setTimeout(apply, 380);
+      settleTimer = setTimeout(() => obra.classList.remove('is-changing'), 520);
     });
   });
   const usePrint = $('[data-use-print]');
@@ -161,22 +170,32 @@
     if (svc && (svc.value === 'Construção de piscina' || svc.value === 'Ainda não sei')) selectRadio('servico', 'Troca de vinil');
   });
 
-  /* ---------- Como funciona: sanfona ---------- */
+  /* ---------- Como funciona: sanfona (abre ao passar o mouse no computador) ---------- */
   const steps = $('[data-steps]');
   if (steps) {
     const items = $$('.step', steps);
+    const wide = window.matchMedia('(min-width: 900px)');
+    const canHover = window.matchMedia('(hover: hover) and (pointer: fine)');
+    const open = (item, force) => {
+      const willOpen = force !== undefined ? force : !item.classList.contains('is-open');
+      if (wide.matches && !willOpen) return; // no computador sempre há um painel aberto
+      items.forEach(other => {
+        const isIt = other === item ? willOpen : false;
+        other.classList.toggle('is-open', isIt);
+        $('.step-head button', other).setAttribute('aria-expanded', String(isIt));
+      });
+    };
+    let hoverTimer;
     items.forEach(item => {
       const btn = $('.step-head button', item);
-      btn.addEventListener('click', () => {
-        const isDesktop = window.matchMedia('(min-width: 900px)').matches;
-        const willOpen = !item.classList.contains('is-open');
-        if (isDesktop && !willOpen) return; // no computador sempre há um painel aberto
-        items.forEach(other => {
-          const open = other === item ? willOpen : false;
-          other.classList.toggle('is-open', open);
-          $('.step-head button', other).setAttribute('aria-expanded', String(open));
-        });
+      btn.addEventListener('click', () => open(item));
+      btn.addEventListener('focus', () => { if (wide.matches) open(item, true); });
+      item.addEventListener('mouseenter', () => {
+        if (!wide.matches || !canHover.matches) return;
+        clearTimeout(hoverTimer);
+        hoverTimer = setTimeout(() => open(item, true), 90); // evita abrir ao só passar por cima
       });
+      item.addEventListener('mouseleave', () => clearTimeout(hoverTimer));
     });
   }
 
@@ -185,6 +204,26 @@
   const heroCta = $('.hero-actions');
   if (waFloat && heroCta && 'IntersectionObserver' in window) {
     new IntersectionObserver(([e]) => waFloat.classList.toggle('is-hidden', e.isIntersecting), { threshold: 0.2 }).observe(heroCta);
+  }
+
+  /* ---------- Cabeçalho fixo e menu do celular ---------- */
+  const header = $('[data-header]');
+  const menuBtn = $('[data-menu-btn]');
+  if (header) {
+    const onScroll = () => header.classList.toggle('is-solid', window.scrollY > 24);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
+  if (header && menuBtn) {
+    const setMenu = (on) => {
+      header.classList.toggle('is-open', on);
+      menuBtn.setAttribute('aria-expanded', String(on));
+      $('.sr-only', menuBtn).textContent = on ? 'Fechar menu' : 'Abrir menu';
+    };
+    menuBtn.addEventListener('click', () => setMenu(!header.classList.contains('is-open')));
+    $$('[data-menu] a, .nav-cta, .wordmark', header).forEach(a => a.addEventListener('click', () => setMenu(false)));
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && header.classList.contains('is-open')) { setMenu(false); menuBtn.focus(); } });
+    document.addEventListener('click', (e) => { if (!header.contains(e.target)) setMenu(false); });
   }
 
   /* ---------- Ano no rodapé ---------- */

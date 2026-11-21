@@ -16,12 +16,13 @@ assets/img/           fotos (todas provisórias) e favicon
 
 ## Seções
 
+- **Cabeçalho fixo**: acompanha a página. Fica transparente sobre a foto do topo e ganha fundo azul-marinho quando a pessoa rola. No celular, os links ficam num menu.
 1. **Topo**: foto em tela cheia, o lema "Seu lazer em boas mãos" com a parte de baixo das letras ondulando como se estivesse debaixo d'água, e o botão "Pedir orçamento no WhatsApp".
-2. **Serviços**: construção, instalação e troca de vinil, estampas e reformas. Cada botão "Orçar…" já marca o serviço no simulador.
+2. **Serviços**: uma lista com espaço para respirar: construção, instalação e troca de vinil, estampas e reformas, cada um com sua foto. Cada link "Orçar…" já marca o serviço no simulador.
 3. **Antes e depois**: um slider que se arrasta com o dedo, com o mouse ou com as setas do teclado.
-4. **Escolha a estampa**: ao tocar numa amostra, o fundo da piscina desenhada muda, com reflexos de água em movimento. O botão "Usar esta estampa no orçamento" leva a escolha para o simulador.
+4. **Escolha a estampa**: cabe numa tela só. Ao tocar numa amostra, aparece uma piscina pronta em 3D (deque de pedra, borda, paredes e fundo) revestida com aquela estampa: a água baixa, o revestimento troca e a piscina enche de novo. O botão "Usar no orçamento" leva a escolha para o simulador.
 5. **Monte seu orçamento**: serviço, tamanho aproximado, medidas, estampa, nome e bairro. O visitante vê a mensagem como ela vai chegar e o botão abre o WhatsApp `(15) 98824-0116` com o texto pronto. Nenhum preço aparece.
-6. **Do contato à entrega**: as quatro etapas (contato, visita, execução e entrega) numa sanfona.
+6. **Do contato à entrega**: as quatro etapas (contato, visita, execução e entrega). No computador, o painel abre ao passar o mouse, com o texto logo abaixo do título e a foto ao lado. No celular, abre ao tocar.
 7. **Nota 5,0 no Google**: a nota, as 61 avaliações e os quatro pontos que os clientes elogiam. O botão leva às avaliações reais no Google. Não há depoimentos inventados.
 8. **Sorocaba e região**: endereço, horário, WhatsApp e mapa do Google com o botão "Como chegar".
 9. **WhatsApp fixo** no canto da tela. Ele some enquanto o botão do topo está visível, para não aparecer duas vezes.
@@ -42,6 +43,7 @@ Todos os pontos estão marcados no `index.html` com comentários `TROCAR`.
 | Imagem de compartilhamento | `assets/img/og.jpg` | 1200 × 630, aparece quando o link é enviado no WhatsApp |
 | Logotipo | `index.html`, classe `wordmark` | hoje o nome está escrito em texto |
 | Estampas de vinil | `index.html`, padrões `p-…` e amostras `.swatch` | São 8 desenhos **ilustrativos** com nomes genéricos. Troque pelo catálogo real: pode ser uma foto de cada amostra no lugar do desenho. |
+| Foto real de obra por estampa | `index.html`, amostras `.swatch` | Coloque `data-obra="assets/img/obras/nome.webp"` no `<input>` da amostra e a foto da obra aparece no lugar da piscina desenhada. |
 | Cores da marca | `assets/css/style.css`, bloco `:root` | Hoje as cores vêm da própria piscina (água, fundo azul, pedra da borda). Se a Belcor tiver cores oficiais, basta trocar ali. |
 
 Ao trocar uma foto, salve em `.webp` com qualidade de 60 a 75 para o site continuar leve.
