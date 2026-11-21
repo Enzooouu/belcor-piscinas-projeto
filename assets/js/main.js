@@ -93,15 +93,27 @@
   const preview = $('[data-preview]');
   const sendBtn = $('[data-send]');
 
+  // medidas digitadas: aceita "6", "6,5", "6.5", "6m"
+  const num = (v) => { const n = parseFloat(String(v || '').replace(',', '.').replace(/[^\d.]/g, '')); return n > 0 && n < 100 ? n : null; };
+  const fmt = (n) => n.toLocaleString('pt-BR', { maximumFractionDigits: 2 });
+  const dims = () => {
+    if (!form) return {};
+    const c = num(form.comp && form.comp.value), l = num(form.larg && form.larg.value), p = num(form.prof && form.prof.value);
+    if (!c && !l && !p) return {};
+    const parts = [c ? `${fmt(c)} m de comprimento` : null, l ? `${fmt(l)} m de largura` : null, p ? `${fmt(p)} m de profundidade` : null].filter(Boolean);
+    const vol = c && l && p ? c * l * p : null;
+    return { text: parts.join(', ') + (vol ? ` (≈ ${fmt(Math.round(vol * 10) / 10)} m³ de água)` : ''), vol };
+  };
+
   const buildMessage = () => {
     if (!form) return '';
     const fd = new FormData(form);
     const get = (k) => (fd.get(k) || '').toString().trim();
     const lines = ['Olá, Belcor! Vim pelo site e gostaria de um orçamento.', ''];
     lines.push(`*Serviço:* ${get('servico')}`);
-    let tamanho = get('tamanho');
-    if (get('medidas')) tamanho = tamanho ? `${tamanho}. Medidas: ${get('medidas')}` : `Medidas: ${get('medidas')}`;
-    if (tamanho) lines.push(`*Tamanho aproximado:* ${tamanho}`);
+    const d = dims();
+    if (d.text) lines.push(`*Medidas:* ${d.text}`);
+    else if (get('tamanho')) lines.push(`*Tamanho aproximado:* ${get('tamanho')}`);
     if (get('estampa')) lines.push(`*Estampa do vinil:* ${get('estampa')}`);
     if (get('nome')) lines.push(`*Nome:* ${get('nome')}`);
     if (get('local')) lines.push(`*Bairro/cidade:* ${get('local')}`);
@@ -116,6 +128,12 @@
     if (preview) preview.innerHTML = escapeHtml(msg).replace(/\*(.+?)\*/g, '<b>$1</b>');
     if (sendBtn) sendBtn.href = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
     const fb = $('[data-fallback-text]'); if (fb) fb.value = msg;
+    const volEl = $('[data-volume]');
+    if (volEl) {
+      const d = dims();
+      volEl.hidden = !d.vol;
+      if (d.vol) volEl.textContent = `≈ ${fmt(Math.round(d.vol * 10) / 10)} m³ de água, ou ${fmt(Math.round(d.vol * 1000))} litros`;
+    }
   };
   if (form) {
     form.addEventListener('input', updateQuote);

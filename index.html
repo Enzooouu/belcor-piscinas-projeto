@@ -414,15 +414,22 @@
           <div class="q-group" role="radiogroup" aria-labelledby="q-tamanho">
             <p class="q-label" id="q-tamanho">Tamanho aproximado da piscina</p>
             <div class="chips">
-              <label class="chip"><input type="radio" name="tamanho" value="Pequena (até 4 × 2 m)"><span>Pequena <small>até 4 × 2 m</small></span></label>
-              <label class="chip"><input type="radio" name="tamanho" value="Média (até 6 × 3 m)" checked><span>Média <small>até 6 × 3 m</small></span></label>
-              <label class="chip"><input type="radio" name="tamanho" value="Grande (acima de 6 × 3 m)"><span>Grande <small>acima de 6 × 3 m</small></span></label>
+              <label class="chip"><input type="radio" name="tamanho" value="Pequena (até 4 × 2 m, ~11 m³)"><span>Pequena <small>até 4 × 2 m · ~11 m³</small></span></label>
+              <label class="chip"><input type="radio" name="tamanho" value="Média (até 6 × 3 m, ~25 m³)" checked><span>Média <small>até 6 × 3 m · ~25 m³</small></span></label>
+              <label class="chip"><input type="radio" name="tamanho" value="Grande (acima de 6 × 3 m, 25 m³ ou mais)"><span>Grande <small>acima de 6 × 3 m · 25 m³ ou mais</small></span></label>
               <label class="chip"><input type="radio" name="tamanho" value="Não sei o tamanho"><span>Não sei</span></label>
             </div>
-            <label class="field">
-              <span class="field-label">Medidas, se souber</span>
-              <input type="text" name="medidas" inputmode="text" autocomplete="off" placeholder="ex.: 6 x 3 m, 1,40 de fundura">
-            </label>
+            <div class="dims" role="group" aria-labelledby="dims-label">
+              <p class="field-label" id="dims-label">Medidas, se souber (em metros)</p>
+              <div class="dims-row">
+                <label class="field"><span class="dim-name">Comprimento</span><input type="text" name="comp" inputmode="decimal" autocomplete="off" placeholder="6"></label>
+                <span class="dims-x" aria-hidden="true">×</span>
+                <label class="field"><span class="dim-name">Largura</span><input type="text" name="larg" inputmode="decimal" autocomplete="off" placeholder="3"></label>
+                <span class="dims-x" aria-hidden="true">×</span>
+                <label class="field"><span class="dim-name">Profundidade</span><input type="text" name="prof" inputmode="decimal" autocomplete="off" placeholder="1,4"></label>
+              </div>
+              <p class="dims-volume" data-volume aria-live="polite" hidden></p>
+            </div>
           </div>
 
           <div class="q-group" role="radiogroup" aria-labelledby="q-estampa">
@@ -545,13 +552,13 @@
                 <span class="review-avatar" aria-hidden="true">NC</span>
                 <div>
                   <p class="review-name">Nome do cliente</p>
-                  <p class="review-meta">Local Guide · 10 avaliações</p>
+                  <p class="review-meta">Local Guide · 10 avaliações · 3 fotos</p>
                 </div>
               </div>
-              <p class="review-text">“Aqui entra o texto de uma avaliação real do Google, como o cliente escreveu.”</p>
+              <p class="review-text">“Aqui entra o texto de uma avaliação real do Google, do jeito que o cliente escreveu. Textos longos são cortados depois de sete linhas, com reticências no final, para todos os cartões ficarem do mesmo tamanho na fileira que passa pela tela…”</p>
               <div class="review-foot">
                 <svg class="stars" viewBox="0 0 100 20" role="img" aria-label="5 de 5 estrelas"><use href="#i-stars"/></svg>
-                <span>há 1 mês · Google</span>
+                <span>há 2 meses · Google</span>
               </div>
             </li>
             <li class="review">
@@ -559,13 +566,13 @@
                 <span class="review-avatar" aria-hidden="true">NC</span>
                 <div>
                   <p class="review-name">Nome do cliente</p>
-                  <p class="review-meta">Local Guide · 10 avaliações</p>
+                  <p class="review-meta">Local Guide · 10 avaliações · 3 fotos</p>
                 </div>
               </div>
-              <p class="review-text">“Aqui entra o texto de uma avaliação real do Google, como o cliente escreveu.”</p>
+              <p class="review-text">“Aqui entra o texto de uma avaliação real do Google, do jeito que o cliente escreveu. Textos longos são cortados depois de sete linhas, com reticências no final, para todos os cartões ficarem do mesmo tamanho na fileira que passa pela tela…”</p>
               <div class="review-foot">
                 <svg class="stars" viewBox="0 0 100 20" role="img" aria-label="5 de 5 estrelas"><use href="#i-stars"/></svg>
-                <span>há 1 mês · Google</span>
+                <span>há 2 meses · Google</span>
               </div>
             </li>
             <li class="review">
@@ -573,13 +580,13 @@
                 <span class="review-avatar" aria-hidden="true">NC</span>
                 <div>
                   <p class="review-name">Nome do cliente</p>
-                  <p class="review-meta">Local Guide · 10 avaliações</p>
+                  <p class="review-meta">Local Guide · 10 avaliações · 3 fotos</p>
                 </div>
               </div>
-              <p class="review-text">“Aqui entra o texto de uma avaliação real do Google, como o cliente escreveu.”</p>
+              <p class="review-text">“Aqui entra o texto de uma avaliação real do Google, do jeito que o cliente escreveu. Textos longos são cortados depois de sete linhas, com reticências no final, para todos os cartões ficarem do mesmo tamanho na fileira que passa pela tela…”</p>
               <div class="review-foot">
                 <svg class="stars" viewBox="0 0 100 20" role="img" aria-label="5 de 5 estrelas"><use href="#i-stars"/></svg>
-                <span>há 1 mês · Google</span>
+                <span>há 2 meses · Google</span>
               </div>
             </li>
             <li class="review">
@@ -587,13 +594,13 @@
                 <span class="review-avatar" aria-hidden="true">NC</span>
                 <div>
                   <p class="review-name">Nome do cliente</p>
-                  <p class="review-meta">Local Guide · 10 avaliações</p>
+                  <p class="review-meta">Local Guide · 10 avaliações · 3 fotos</p>
                 </div>
               </div>
-              <p class="review-text">“Aqui entra o texto de uma avaliação real do Google, como o cliente escreveu.”</p>
+              <p class="review-text">“Aqui entra o texto de uma avaliação real do Google, do jeito que o cliente escreveu. Textos longos são cortados depois de sete linhas, com reticências no final, para todos os cartões ficarem do mesmo tamanho na fileira que passa pela tela…”</p>
               <div class="review-foot">
                 <svg class="stars" viewBox="0 0 100 20" role="img" aria-label="5 de 5 estrelas"><use href="#i-stars"/></svg>
-                <span>há 1 mês · Google</span>
+                <span>há 2 meses · Google</span>
               </div>
             </li>
             <li class="review">
@@ -601,13 +608,13 @@
                 <span class="review-avatar" aria-hidden="true">NC</span>
                 <div>
                   <p class="review-name">Nome do cliente</p>
-                  <p class="review-meta">Local Guide · 10 avaliações</p>
+                  <p class="review-meta">Local Guide · 10 avaliações · 3 fotos</p>
                 </div>
               </div>
-              <p class="review-text">“Aqui entra o texto de uma avaliação real do Google, como o cliente escreveu.”</p>
+              <p class="review-text">“Aqui entra o texto de uma avaliação real do Google, do jeito que o cliente escreveu. Textos longos são cortados depois de sete linhas, com reticências no final, para todos os cartões ficarem do mesmo tamanho na fileira que passa pela tela…”</p>
               <div class="review-foot">
                 <svg class="stars" viewBox="0 0 100 20" role="img" aria-label="5 de 5 estrelas"><use href="#i-stars"/></svg>
-                <span>há 1 mês · Google</span>
+                <span>há 2 meses · Google</span>
               </div>
             </li>
             <li class="review">
@@ -615,13 +622,13 @@
                 <span class="review-avatar" aria-hidden="true">NC</span>
                 <div>
                   <p class="review-name">Nome do cliente</p>
-                  <p class="review-meta">Local Guide · 10 avaliações</p>
+                  <p class="review-meta">Local Guide · 10 avaliações · 3 fotos</p>
                 </div>
               </div>
-              <p class="review-text">“Aqui entra o texto de uma avaliação real do Google, como o cliente escreveu.”</p>
+              <p class="review-text">“Aqui entra o texto de uma avaliação real do Google, do jeito que o cliente escreveu. Textos longos são cortados depois de sete linhas, com reticências no final, para todos os cartões ficarem do mesmo tamanho na fileira que passa pela tela…”</p>
               <div class="review-foot">
                 <svg class="stars" viewBox="0 0 100 20" role="img" aria-label="5 de 5 estrelas"><use href="#i-stars"/></svg>
-                <span>há 1 mês · Google</span>
+                <span>há 2 meses · Google</span>
               </div>
             </li>
           </ul>
@@ -631,13 +638,13 @@
                 <span class="review-avatar" aria-hidden="true">NC</span>
                 <div>
                   <p class="review-name">Nome do cliente</p>
-                  <p class="review-meta">Local Guide · 10 avaliações</p>
+                  <p class="review-meta">Local Guide · 10 avaliações · 3 fotos</p>
                 </div>
               </div>
-              <p class="review-text">“Aqui entra o texto de uma avaliação real do Google, como o cliente escreveu.”</p>
+              <p class="review-text">“Aqui entra o texto de uma avaliação real do Google, do jeito que o cliente escreveu. Textos longos são cortados depois de sete linhas, com reticências no final, para todos os cartões ficarem do mesmo tamanho na fileira que passa pela tela…”</p>
               <div class="review-foot">
                 <svg class="stars" viewBox="0 0 100 20" role="img" aria-label="5 de 5 estrelas"><use href="#i-stars"/></svg>
-                <span>há 1 mês · Google</span>
+                <span>há 2 meses · Google</span>
               </div>
             </li>
             <li class="review">
@@ -645,13 +652,13 @@
                 <span class="review-avatar" aria-hidden="true">NC</span>
                 <div>
                   <p class="review-name">Nome do cliente</p>
-                  <p class="review-meta">Local Guide · 10 avaliações</p>
+                  <p class="review-meta">Local Guide · 10 avaliações · 3 fotos</p>
                 </div>
               </div>
-              <p class="review-text">“Aqui entra o texto de uma avaliação real do Google, como o cliente escreveu.”</p>
+              <p class="review-text">“Aqui entra o texto de uma avaliação real do Google, do jeito que o cliente escreveu. Textos longos são cortados depois de sete linhas, com reticências no final, para todos os cartões ficarem do mesmo tamanho na fileira que passa pela tela…”</p>
               <div class="review-foot">
                 <svg class="stars" viewBox="0 0 100 20" role="img" aria-label="5 de 5 estrelas"><use href="#i-stars"/></svg>
-                <span>há 1 mês · Google</span>
+                <span>há 2 meses · Google</span>
               </div>
             </li>
             <li class="review">
@@ -659,13 +666,13 @@
                 <span class="review-avatar" aria-hidden="true">NC</span>
                 <div>
                   <p class="review-name">Nome do cliente</p>
-                  <p class="review-meta">Local Guide · 10 avaliações</p>
+                  <p class="review-meta">Local Guide · 10 avaliações · 3 fotos</p>
                 </div>
               </div>
-              <p class="review-text">“Aqui entra o texto de uma avaliação real do Google, como o cliente escreveu.”</p>
+              <p class="review-text">“Aqui entra o texto de uma avaliação real do Google, do jeito que o cliente escreveu. Textos longos são cortados depois de sete linhas, com reticências no final, para todos os cartões ficarem do mesmo tamanho na fileira que passa pela tela…”</p>
               <div class="review-foot">
                 <svg class="stars" viewBox="0 0 100 20" role="img" aria-label="5 de 5 estrelas"><use href="#i-stars"/></svg>
-                <span>há 1 mês · Google</span>
+                <span>há 2 meses · Google</span>
               </div>
             </li>
             <li class="review">
@@ -673,13 +680,13 @@
                 <span class="review-avatar" aria-hidden="true">NC</span>
                 <div>
                   <p class="review-name">Nome do cliente</p>
-                  <p class="review-meta">Local Guide · 10 avaliações</p>
+                  <p class="review-meta">Local Guide · 10 avaliações · 3 fotos</p>
                 </div>
               </div>
-              <p class="review-text">“Aqui entra o texto de uma avaliação real do Google, como o cliente escreveu.”</p>
+              <p class="review-text">“Aqui entra o texto de uma avaliação real do Google, do jeito que o cliente escreveu. Textos longos são cortados depois de sete linhas, com reticências no final, para todos os cartões ficarem do mesmo tamanho na fileira que passa pela tela…”</p>
               <div class="review-foot">
                 <svg class="stars" viewBox="0 0 100 20" role="img" aria-label="5 de 5 estrelas"><use href="#i-stars"/></svg>
-                <span>há 1 mês · Google</span>
+                <span>há 2 meses · Google</span>
               </div>
             </li>
             <li class="review">
@@ -687,13 +694,13 @@
                 <span class="review-avatar" aria-hidden="true">NC</span>
                 <div>
                   <p class="review-name">Nome do cliente</p>
-                  <p class="review-meta">Local Guide · 10 avaliações</p>
+                  <p class="review-meta">Local Guide · 10 avaliações · 3 fotos</p>
                 </div>
               </div>
-              <p class="review-text">“Aqui entra o texto de uma avaliação real do Google, como o cliente escreveu.”</p>
+              <p class="review-text">“Aqui entra o texto de uma avaliação real do Google, do jeito que o cliente escreveu. Textos longos são cortados depois de sete linhas, com reticências no final, para todos os cartões ficarem do mesmo tamanho na fileira que passa pela tela…”</p>
               <div class="review-foot">
                 <svg class="stars" viewBox="0 0 100 20" role="img" aria-label="5 de 5 estrelas"><use href="#i-stars"/></svg>
-                <span>há 1 mês · Google</span>
+                <span>há 2 meses · Google</span>
               </div>
             </li>
             <li class="review">
@@ -701,13 +708,13 @@
                 <span class="review-avatar" aria-hidden="true">NC</span>
                 <div>
                   <p class="review-name">Nome do cliente</p>
-                  <p class="review-meta">Local Guide · 10 avaliações</p>
+                  <p class="review-meta">Local Guide · 10 avaliações · 3 fotos</p>
                 </div>
               </div>
-              <p class="review-text">“Aqui entra o texto de uma avaliação real do Google, como o cliente escreveu.”</p>
+              <p class="review-text">“Aqui entra o texto de uma avaliação real do Google, do jeito que o cliente escreveu. Textos longos são cortados depois de sete linhas, com reticências no final, para todos os cartões ficarem do mesmo tamanho na fileira que passa pela tela…”</p>
               <div class="review-foot">
                 <svg class="stars" viewBox="0 0 100 20" role="img" aria-label="5 de 5 estrelas"><use href="#i-stars"/></svg>
-                <span>há 1 mês · Google</span>
+                <span>há 2 meses · Google</span>
               </div>
             </li>
           </ul>
