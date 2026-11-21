@@ -127,7 +127,7 @@
   <header class="site-header" data-header>
     <nav class="nav" aria-label="Principal">
       <!-- Logo redesenhado em vetor (pasta logo/ tem as versões em PNG de alta resolução) -->
-      <a class="wordmark" href="#topo" aria-label="Belcor Piscinas, início"><img src="assets/img/logo-belcor.svg" width="584" height="187" alt="" decoding="async"></a>
+      <a class="wordmark" href="#topo" aria-label="Belcor Piscinas, início"><img class="logo-light" src="assets/img/logo-belcor.svg" width="584" height="187" alt="" decoding="async"><img class="logo-dark" src="assets/img/logo-belcor-azul.svg" width="584" height="187" alt="" decoding="async"></a>
       <ul class="nav-links" id="menu" data-menu>
         <li><a href="#servicos">Serviços</a></li>
         <li><a href="#antes-depois">Antes e depois</a></li>
@@ -288,12 +288,13 @@
                Para mostrar uma FOTO REAL de obra com a estampa, coloque data-obra="assets/img/obras/nome.webp"
                na amostra correspondente: a foto aparece no lugar do desenho. -->
           <figure class="obra" data-obra>
-            <div class="obra-stage" aria-hidden="true">
+            <div class="obra-stage" aria-hidden="true" data-obra-stage>
               <div class="pool3d">
                 <div class="face floor"><svg width="100%" height="100%"><rect width="100%" height="100%" fill="url(#p-pastilha-azul)" data-pool-fill/></svg></div>
-                <div class="face wall-back"><svg width="100%" height="100%"><rect width="100%" height="100%" fill="url(#p-pastilha-azul)" data-pool-fill/></svg></div>
-                <div class="face wall-left"><svg width="100%" height="100%"><rect width="100%" height="100%" fill="url(#p-pastilha-azul)" data-pool-fill/></svg></div>
-                <div class="face wall-right"><svg width="100%" height="100%"><rect width="100%" height="100%" fill="url(#p-pastilha-azul)" data-pool-fill/></svg></div>
+                <div class="face wall wall-back"><svg width="100%" height="100%"><rect width="100%" height="100%" fill="url(#p-pastilha-azul)" data-pool-fill/></svg><span class="band"></span></div>
+                <div class="face wall wall-left"><svg width="100%" height="100%"><rect width="100%" height="100%" fill="url(#p-pastilha-azul)" data-pool-fill/></svg><span class="band"></span></div>
+                <div class="face wall wall-front"><svg width="100%" height="100%"><rect width="100%" height="100%" fill="url(#p-pastilha-azul)" data-pool-fill/></svg><span class="band"></span></div>
+                <div class="face wall wall-right"><svg width="100%" height="100%"><rect width="100%" height="100%" fill="url(#p-pastilha-azul)" data-pool-fill/></svg><span class="band"></span></div>
                 <div class="water"><span class="pool-caustics c1"></span><span class="pool-caustics c2"></span></div>
               </div>
               <!-- deque e borda ficam numa camada por cima, escondendo o que fica sob a borda -->
@@ -306,6 +307,13 @@
               </div>
             </div>
             <img class="obra-photo" alt="" hidden data-obra-photo>
+            <p class="obra-hint" data-obra-hint>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 0 1 14-5.3M20 12a8 8 0 0 1-14 5.3M18 3v4h-4M6 21v-4h4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Arraste para girar
+            </p>
+            <button class="obra-reset" type="button" data-obra-reset aria-label="Voltar a piscina para a posição inicial" hidden>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.4-5.7M4 4v4h4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
             <figcaption class="sr-only" data-obra-caption>Piscina pronta revestida com a estampa Pastilha azul</figcaption>
           </figure>
           <div class="pool-info" aria-live="polite">
@@ -380,6 +388,13 @@
             </label>
           </div>
 
+          <div class="q-group">
+            <label class="field">
+              <span class="q-label">Quer contar mais alguma coisa? <small>(opcional)</small></span>
+              <textarea name="obs" rows="3" placeholder="ex.: a piscina está vazando, quero aquecimento, prefiro visita no sábado…"></textarea>
+            </label>
+          </div>
+
           <!-- Sem JavaScript, o formulário envia este texto padrão -->
           <input type="hidden" name="text" value="Olá, Belcor! Vim pelo site e gostaria de um orçamento." data-fallback-text>
         </form>
@@ -407,21 +422,21 @@
         </div>
 
         <ol class="steps" data-steps data-reveal>
-          <li class="step is-open" style="--tone: #48e0fa; --tone-ink: #013b5e">
+          <li class="step is-open" style="--tone: #0d4a72; --tone-ink: #ffffff">
             <h3 class="step-head"><button type="button" aria-expanded="true" aria-controls="step-1">Contato</button></h3>
             <div class="step-body" id="step-1">
               <p>Você chama a Belcor no WhatsApp, conta o que precisa e, se já tem piscina, manda umas fotos dela.</p>
               <img src="assets/img/lazer.webp" width="1100" height="800" loading="lazy" decoding="async" alt="Área de lazer com piscina ao lado de uma casa">
             </div>
           </li>
-          <li class="step" style="--tone: #92f7fe; --tone-ink: #013b5e">
+          <li class="step" style="--tone: #135a88; --tone-ink: #ffffff">
             <h3 class="step-head"><button type="button" aria-expanded="false" aria-controls="step-2">Visita</button></h3>
             <div class="step-body" id="step-2">
               <p>A equipe vai até o local para medir e avaliar o serviço. Com isso em mãos, você recebe o orçamento.</p>
               <img src="assets/img/vinil.webp" width="1100" height="800" loading="lazy" decoding="async" alt="Piscina revestida com pastilhas azuis vista de perto">
             </div>
           </li>
-          <li class="step" style="--tone: #a3bae4; --tone-ink: #013b5e">
+          <li class="step" style="--tone: #1b5fa6; --tone-ink: #ffffff">
             <h3 class="step-head"><button type="button" aria-expanded="false" aria-controls="step-3">Execução</button></h3>
             <div class="step-body" id="step-3">
               <p>Com tudo combinado, a obra, a reforma ou a troca do vinil começa na data marcada.</p>
@@ -585,6 +600,23 @@
   <a class="wa-float" href="https://wa.me/5515988240116?text=Ol%C3%A1%2C%20Belcor!%20Vim%20pelo%20site%20e%20gostaria%20de%20um%20or%C3%A7amento." target="_blank" rel="noopener" aria-label="Conversar com a Belcor no WhatsApp">
     <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg>
   </a>
+
+  <!-- Foto ampliada: abre ao clicar numa foto -->
+  <dialog class="lightbox" data-lightbox aria-label="Foto ampliada">
+    <div class="lb-stage" data-lb-stage>
+      <img data-lb-img alt="">
+    </div>
+    <div class="lb-bar">
+      <p class="lb-caption" data-lb-caption></p>
+      <button class="lb-btn" type="button" data-lb-zoom aria-pressed="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16.5 16.5L21 21M8 11h6M11 8v6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-lb-plus/></svg>
+        <span data-lb-zoom-label>Dar zoom</span>
+      </button>
+      <button class="lb-btn lb-close" type="button" data-lb-close aria-label="Fechar foto">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </dialog>
 
   <!-- Ícones -->
   <svg class="defs" width="0" height="0" aria-hidden="true" focusable="false">

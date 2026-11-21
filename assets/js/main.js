@@ -105,6 +105,7 @@
     if (get('estampa')) lines.push(`*Estampa do vinil:* ${get('estampa')}`);
     if (get('nome')) lines.push(`*Nome:* ${get('nome')}`);
     if (get('local')) lines.push(`*Bairro/cidade:* ${get('local')}`);
+    if (get('obs')) lines.push('', `*Mais detalhes:* ${get('obs')}`);
     return lines.join('\n');
   };
 
@@ -224,6 +225,105 @@
     $$('[data-menu] a, .nav-cta, .wordmark', header).forEach(a => a.addEventListener('click', () => setMenu(false)));
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && header.classList.contains('is-open')) { setMenu(false); menuBtn.focus(); } });
     document.addEventListener('click', (e) => { if (!header.contains(e.target)) setMenu(false); });
+  }
+
+  /* ---------- Estampas: girar a câmera da piscina 3D ---------- */
+  if (obra) {
+    const reset = $('[data-obra-reset]');
+    const TILT0 = 52, YAW0 = 0;
+    let tilt = TILT0, yaw = YAW0, drag = null;
+    const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+    const apply = () => {
+      obra.style.setProperty('--tilt', tilt + 'deg');
+      obra.style.setProperty('--yaw', yaw + 'deg');
+      const moved = Math.abs(tilt - TILT0) > 1 || Math.abs(yaw - YAW0) > 1;
+      if (reset) reset.hidden = !moved;
+    };
+    obra.addEventListener('pointerdown', (e) => {
+      if (e.target.closest('button')) return;
+      drag = { x: e.clientX, y: e.clientY, tilt, yaw, decided: e.pointerType === 'mouse', id: e.pointerId };
+      if (drag.decided) { obra.setPointerCapture(e.pointerId); obra.classList.add('is-dragging'); }
+    });
+    obra.addEventListener('pointermove', (e) => {
+      if (!drag) return;
+      const dx = e.clientX - drag.x, dy = e.clientY - drag.y;
+      if (!drag.decided) {
+        // no toque: só gira se o gesto for de lado; para cima e para baixo a página rola normalmente
+        if (Math.abs(dx) < 6 && Math.abs(dy) < 6) return;
+        if (Math.abs(dy) > Math.abs(dx)) { drag = null; return; }
+        drag.decided = true; obra.setPointerCapture(e.pointerId); obra.classList.add('is-dragging');
+      }
+      yaw = clamp(drag.yaw + dx * 0.35, -180, 180);
+      if (e.pointerType === 'mouse') tilt = clamp(drag.tilt - dy * 0.25, 28, 70);
+      obra.classList.add('has-moved');
+      apply();
+    });
+    const end = () => { drag = null; obra.classList.remove('is-dragging'); };
+    obra.addEventListener('pointerup', end);
+    obra.addEventListener('pointercancel', end);
+    // teclado: setas giram quando a piscina está em foco
+    obra.tabIndex = 0;
+    obra.setAttribute('aria-label', 'Piscina em 3D. Use as setas para girar.');
+    obra.addEventListener('keydown', (e) => {
+      const k = { ArrowLeft: [0, -10], ArrowRight: [0, 10], ArrowUp: [4, 0], ArrowDown: [-4, 0] }[e.key];
+      if (!k) return;
+      e.preventDefault(); tilt = clamp(tilt + k[0], 28, 70); yaw = clamp(yaw + k[1], -180, 180);
+      obra.classList.add('has-moved'); apply();
+    });
+    if (reset) reset.addEventListener('click', () => { tilt = TILT0; yaw = YAW0; apply(); });
+  }
+
+  /* ---------- Fotos: clique para ampliar, com opção de zoom ---------- */
+  const lb = $('[data-lightbox]');
+  if (lb && typeof lb.showModal === 'function') {
+    const lbImg = $('[data-lb-img]', lb);
+    const lbCap = $('[data-lb-caption]', lb);
+    const zoomBtn = $('[data-lb-zoom]', lb);
+    const zoomLabel = $('[data-lb-zoom-label]', lb);
+    let opener = null;
+    const setZoom = (on, e) => {
+      lb.classList.toggle('is-zoomed', on);
+      zoomBtn.setAttribute('aria-pressed', String(on));
+      zoomLabel.textContent = on ? 'Tirar zoom' : 'Dar zoom';
+      if (on && e) aim(e); else if (!on) { lbImg.style.setProperty('--ox', '50%'); lbImg.style.setProperty('--oy', '50%'); }
+    };
+    // o ponto de zoom acompanha o mouse ou o dedo
+    const aim = (e) => {
+      const r = lbImg.getBoundingClientRect();
+      const x = Math.max(0, Math.min(100, ((e.clientX - r.left) / r.width) * 100));
+      const y = Math.max(0, Math.min(100, ((e.clientY - r.top) / r.height) * 100));
+      lbImg.style.setProperty('--ox', x + '%'); lbImg.style.setProperty('--oy', y + '%');
+    };
+    const open = (img) => {
+      opener = img;
+      lbImg.src = img.currentSrc || img.src;
+      lbImg.alt = img.alt;
+      lbCap.textContent = img.alt;
+      setZoom(false);
+      lb.showModal();
+    };
+    $$('.service-media img, .step-body img, .t-photo img').forEach(img => {
+      img.setAttribute('data-zoomable', '');
+      img.tabIndex = 0;
+      img.setAttribute('role', 'button');
+      img.setAttribute('aria-label', `Ampliar foto: ${img.alt}`);
+      img.addEventListener('click', () => open(img));
+      img.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(img); } });
+    });
+    let downAt = null;
+    lbImg.addEventListener('pointerdown', (e) => { downAt = { x: e.clientX, y: e.clientY }; if (lb.classList.contains('is-zoomed')) lb.classList.add('is-panning'); });
+    lbImg.addEventListener('pointermove', (e) => { if (lb.classList.contains('is-zoomed') && (e.pointerType === 'mouse' || downAt)) aim(e); });
+    lbImg.addEventListener('pointerup', (e) => {
+      lb.classList.remove('is-panning');
+      const moved = downAt && Math.hypot(e.clientX - downAt.x, e.clientY - downAt.y) > 8;
+      downAt = null;
+      if (!moved) setZoom(!lb.classList.contains('is-zoomed'), e); // toque ou clique simples liga/desliga o zoom
+    });
+    zoomBtn.addEventListener('click', () => setZoom(!lb.classList.contains('is-zoomed')));
+    $('[data-lb-close]', lb).addEventListener('click', () => lb.close());
+    // clicar fora da foto fecha
+    $('[data-lb-stage]', lb).addEventListener('click', (e) => { if (e.target === e.currentTarget) lb.close(); });
+    lb.addEventListener('close', () => { setZoom(false); if (opener) opener.focus(); });
   }
 
   /* ---------- Ano no rodapé ---------- */
