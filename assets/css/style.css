@@ -720,6 +720,7 @@ button, input { font: inherit; color: inherit; }
 .stars-lg { width: 100%; height: 40px; }
 .rating-copy { display: grid; gap: 20px; justify-items: start; }
 .rating-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 28px; margin-top: 8px; }
+@media (min-width: 1100px) { .rating-actions { flex-wrap: nowrap; } .rating-insta { white-space: nowrap; } }
 .rating-copy .h-section { max-width: none; font-size: clamp(2.5rem, 1.4rem + 3vw, 4.25rem); }
 @media (min-width: 900px) { .rating-copy .h-section { white-space: nowrap; } }
 .rating-copy .lead { margin-top: 0; max-width: 46ch; }
@@ -753,8 +754,10 @@ button, input { font: inherit; color: inherit; }
 @media (min-width: 900px) {
   /* nota e estrelas à esquerda; título e texto à direita; botão e Instagram lado a lado embaixo */
   .rating-head { grid-template-columns: repeat(12, 1fr); column-gap: 24px; align-items: center; }
-  .rating-score { grid-column: 1 / span 4; justify-self: center; }
-  .rating-copy { grid-column: 5 / -1; }
+  .rating-score { grid-column: 1 / span 5; justify-self: start; }
+  .rating-copy { grid-column: 7 / -1; }
+  .score { font-size: clamp(10rem, 4rem + 13vw, 20rem); }
+  .stars-lg { height: 48px; margin-top: .9em; } /* espaço para a vírgula do 5,0 */
 }
 @media (prefers-reduced-motion: reduce) {
   .reviews { overflow-x: auto; }
