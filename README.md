@@ -23,7 +23,7 @@ assets/img/           fotos (todas provisórias) e favicon
 4. **Escolha a estampa**: cabe numa tela só. Ao tocar numa amostra, aparece uma piscina pronta em 3D (deque de pedra, borda, paredes e fundo) revestida com aquela estampa: a água baixa, o revestimento troca e a piscina enche de novo. O botão "Usar no orçamento" leva a escolha para o simulador.
 5. **Monte seu orçamento**: serviço, tamanho aproximado, medidas, estampa, nome e bairro. O visitante vê a mensagem como ela vai chegar e o botão abre o WhatsApp `(15) 98824-0116` com o texto pronto. Nenhum preço aparece.
 6. **Do contato à entrega**: as quatro etapas (contato, visita, execução e entrega). No computador, o painel abre ao passar o mouse, com o texto logo abaixo do título e a foto ao lado. No celular, abre ao tocar.
-7. **Nota 5,0 no Google**: a nota, as 61 avaliações e os quatro pontos que os clientes elogiam. O botão leva às avaliações reais no Google. Não há depoimentos inventados.
+7. **Nota 5,0 no Google**: a nota, as 61 avaliações, o que os clientes elogiam e uma fileira de avaliações rolando para a direita (pausa ao passar o mouse). Os textos ainda são provisórios, à espera das avaliações reais.
 8. **Sorocaba e região**: endereço, horário, WhatsApp e mapa do Google com o botão "Como chegar".
 9. **WhatsApp fixo** no canto da tela. Ele some enquanto o botão do topo está visível, para não aparecer duas vezes.
 10. **Rodapé**: o telefone em letras grandes, endereço, horário e Instagram @belcorpiscinas.
@@ -41,10 +41,11 @@ Todos os pontos estão marcados no `index.html` com comentários `TROCAR`.
 | Antes / depois | `assets/img/antes.webp`, `assets/img/depois.webp` | 1400 × 900, **as duas tiradas do mesmo ângulo**. Hoje o "antes" é uma simulação feita a partir da foto do "depois", e por isso a legenda diz "Exemplo ilustrativo". |
 | Fotos do passo a passo | `lazer.webp`, `vinil.webp`, `estampa.webp`, `area.webp` | de preferência fotos de obras da Belcor |
 | Imagem de compartilhamento | `assets/img/og.jpg` | 1200 × 630, aparece quando o link é enviado no WhatsApp |
-| Logotipo | `index.html`, classe `wordmark` | hoje o nome está escrito em texto |
+| Logotipo | `assets/img/logo-belcor.webp` | Recortado da arte enviada pela Belcor, com fundo transparente. Troque pela versão vetorial oficial (SVG) quando houver. |
 | Estampas de vinil | `index.html`, padrões `p-…` e amostras `.swatch` | São 8 desenhos **ilustrativos** com nomes genéricos. Troque pelo catálogo real: pode ser uma foto de cada amostra no lugar do desenho. |
 | Foto real de obra por estampa | `index.html`, amostras `.swatch` | Coloque `data-obra="assets/img/obras/nome.webp"` no `<input>` da amostra e a foto da obra aparece no lugar da piscina desenhada. |
-| Cores da marca | `assets/css/style.css`, bloco `:root` | Hoje as cores vêm da própria piscina (água, fundo azul, pedra da borda). Se a Belcor tiver cores oficiais, basta trocar ali. |
+| Cores da marca | `assets/css/style.css`, bloco `:root` | Tiradas do logo: azul-marinho #013b5e, as quatro faixas (#48e0fa, #92f7fe, #a3bae4, #2252bf) e o amarelo do lema nas estrelas. |
+| Avaliações do Google | `index.html`, seção `avaliacoes` | A fileira que rola tem 6 espaços com texto provisório. Troque pelos textos e nomes reais, nas duas listas (a segunda é a cópia que fecha o laço). |
 
 Ao trocar uma foto, salve em `.webp` com qualidade de 60 a 75 para o site continuar leve.
 
