@@ -31,12 +31,12 @@
   const startRipple = () => setTimeout(() => document.documentElement.classList.add('ripple-on'), 400);
   if (!reduceMotion) { if (document.readyState === 'complete') startRipple(); else window.addEventListener('load', startRipple, { once: true }); }
 
-  // animações contínuas (reflexo da água, fileira de avaliações) só rodam quando estão na tela
+  // o reflexo da água na piscina 3D só se mexe quando ela está na tela
   if ('IntersectionObserver' in window) {
     const liveIO = new IntersectionObserver((entries) => entries.forEach(e => e.target.classList.toggle('is-live', e.isIntersecting)), { rootMargin: '100px' });
-    $$('.obra, .reviews').forEach(el => liveIO.observe(el));
+    $$('.obra').forEach(el => liveIO.observe(el));
   } else {
-    $$('.obra, .reviews').forEach(el => el.classList.add('is-live'));
+    $$('.obra').forEach(el => el.classList.add('is-live'));
   }
 
   /* ---------- Entradas das seções ---------- */
@@ -261,11 +261,22 @@
     if (d.open) faqs.forEach(o => { if (o !== d) o.open = false; });
   }));
 
-  /* ---------- WhatsApp fixo: some enquanto o botão do topo está visível ---------- */
+  /* ---------- WhatsApp fixo: some quando já existe outro botão de contato na tela
+     (topo, Enviar pelo WhatsApp, contato, telefone do rodapé) ou enquanto a pessoa digita no orçamento ---------- */
   const waFloat = $('.wa-float');
-  const heroCta = $('.hero-actions');
-  if (waFloat && heroCta && 'IntersectionObserver' in window) {
-    new IntersectionObserver(([e]) => waFloat.classList.toggle('is-hidden', e.isIntersecting), { threshold: 0.2 }).observe(heroCta);
+  if (waFloat && 'IntersectionObserver' in window) {
+    const onScreen = new Set();
+    let typing = false;
+    const refresh = () => waFloat.classList.toggle('is-hidden', typing || onScreen.size > 0);
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => e.isIntersecting ? onScreen.add(e.target) : onScreen.delete(e.target));
+      refresh();
+    }, { threshold: 0.1 });
+    $$('.hero-actions, [data-send], .place-actions, .footer-phone').forEach(el => io.observe(el));
+    if (form) {
+      form.addEventListener('focusin', (e) => { if (e.target.matches('input[type=text], textarea')) { typing = true; refresh(); } });
+      form.addEventListener('focusout', () => { typing = false; refresh(); });
+    }
   }
 
   /* ---------- Cabeçalho fixo e menu do celular ---------- */
@@ -403,6 +414,4 @@
     status.hidden = false;
   }
 
-  /* ---------- Ano no rodapé ---------- */
-  const y = $('[data-year]'); if (y) y.textContent = new Date().getFullYear();
 })();
