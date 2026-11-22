@@ -133,4 +133,4 @@ O que foi feito: fonte hospedada no próprio site, fotos em duas larguras (o cel
 1. Troque `https://www.SEUDOMINIO.com.br` pelo endereço real em `index.html`, `robots.txt` e `sitemap.xml`.
 2. Cadastre o site no Google Search Console e envie o `sitemap.xml`.
 3. Coloque o endereço do site no perfil da Belcor no Google (Google Meu Negócio) e no Instagram.
-4. Ao mudar `style.css` ou `main.js`, aumente o número em `?v=4` no `index.html` para os navegadores baixarem a versão nova.
+4. Ao mudar `style.css` ou `main.js`, aumente o número em `?v=5` no `index.html` para os navegadores baixarem a versão nova.

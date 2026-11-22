@@ -171,12 +171,14 @@ button, input { font: inherit; color: inherit; }
   display: grid; place-items: center;
   background: var(--navy);
   /* se o script falhar por algum motivo, a tela sai sozinha depois de 3 s */
-  animation: splashOut .6s cubic-bezier(.7, 0, .2, 1) 3s forwards;
+  animation: splashFailsafe .6s cubic-bezier(.7, 0, .2, 1) 3s forwards;
   cursor: pointer;
 }
-.splash.is-out { animation: splashOut .6s cubic-bezier(.7, 0, .2, 1) forwards; pointer-events: none; }
+.splash.is-out { animation: splashOut .7s cubic-bezier(.7, 0, .2, 1) forwards; pointer-events: none; }
 .splash-on { overflow: hidden; }   /* sem rolar a página por trás */
 /* a tela azul escorre de baixo para cima, com a borda de baixo arredondada */
+/* duas animações com nomes diferentes: se tivessem o mesmo nome, o navegador pularia direto para o fim da subida */
+@keyframes splashFailsafe { to { transform: translateY(-100%); visibility: hidden; } }
 @keyframes splashOut {
   0% { transform: translateY(0); border-radius: 0; }
   100% { transform: translateY(-100%); border-radius: 0 0 48px 48px; visibility: hidden; }
@@ -184,9 +186,12 @@ button, input { font: inherit; color: inherit; }
 .splash-logo {
   position: relative;
   width: min(80vw, 440px); aspect-ratio: 584.1 / 187.1;
-  transition: transform .6s cubic-bezier(.7, 0, .2, 1), opacity .4s ease;
 }
-.splash.is-out .splash-logo { transform: translateY(-24px); opacity: 0; }
+@media (min-width: 900px) { .splash-logo { width: min(52vw, 720px); } }
+.splash-logo {
+  transition: transform .7s cubic-bezier(.7, 0, .2, 1), opacity .5s ease .15s;
+}
+.splash.is-out .splash-logo { transform: translateY(-40px); opacity: 0; }
 
 /* as quatro faixas, com os dois frisos brancos de cada uma */
 .sb {

@@ -33,7 +33,7 @@
   <link rel="preload" as="image" href="assets/img/hero-828.webp" media="(max-width: 767px)" fetchpriority="high">
   <link rel="preload" as="image" href="assets/img/hero-1920.webp" media="(min-width: 768px)" fetchpriority="high">
 
-  <link rel="stylesheet" href="assets/css/style.css?v=4">
+  <link rel="stylesheet" href="assets/css/style.css?v=5">
   <script>
     document.documentElement.classList.add('js');
     // Tela de abertura: só na primeira visita da sessão e nunca para quem pediu menos animação no celular
@@ -167,7 +167,7 @@
         root.classList.remove('splash-on');
         window.__belcorSplash = 'out';
         document.dispatchEvent(new Event('belcor:splash-out'));
-        setTimeout(function () { el.remove(); }, 700);
+        setTimeout(function () { el.remove(); }, 800);
       }
       function check() { var t = Date.now() - start; if ((loaded && t >= MIN) || t >= MAX) out(); }
       window.addEventListener('load', function () { loaded = true; check(); });
@@ -1010,6 +1010,6 @@
     <symbol id="i-stars" viewBox="0 0 100 20"><use href="#i-star" x="0" width="20" height="20"/><use href="#i-star" x="20" width="20" height="20"/><use href="#i-star" x="40" width="20" height="20"/><use href="#i-star" x="60" width="20" height="20"/><use href="#i-star" x="80" width="20" height="20"/></symbol>
   </svg>
 
-  <script src="assets/js/main.js?v=4" defer></script>
+  <script src="assets/js/main.js?v=5" defer></script>
 </body>
 </html>
