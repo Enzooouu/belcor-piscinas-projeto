@@ -40,6 +40,7 @@ assets/img/           fotos (todas provisórias) e favicon
 
 ## Seções
 
+- **Tela de abertura**: tela azul em que as quatro faixas do logo entram pela esquerda, o nome "Belcor Piscinas" vai sendo escrito e a tela sobe revelando o site. Aparece só na primeira visita da sessão, dura de 1,35 a 1,65 s (sai antes do máximo se a página já carregou) e some ao tocar. Quem ativou "reduzir movimento" no celular não vê. Para testar de novo, feche a aba e abra outra.
 - **Cabeçalho fixo**: acompanha a página. Fica transparente sobre a foto do topo e ganha fundo branco quando a pessoa rola. Abaixo de 1200 px de largura, os links ficam num menu.
 1. **Topo**: foto em tela cheia, o lema "Seu lazer em boas mãos" com a parte de baixo das letras ondulando como se estivesse debaixo d'água, e o botão "Pedir orçamento no WhatsApp".
 2. **Serviços**: construção, instalação e troca de vinil, estampas e reformas. No celular, foto pequena ao lado do texto. Cada link "Orçar…" já marca o serviço no simulador.
@@ -132,4 +133,4 @@ O que foi feito: fonte hospedada no próprio site, fotos em duas larguras (o cel
 1. Troque `https://www.SEUDOMINIO.com.br` pelo endereço real em `index.html`, `robots.txt` e `sitemap.xml`.
 2. Cadastre o site no Google Search Console e envie o `sitemap.xml`.
 3. Coloque o endereço do site no perfil da Belcor no Google (Google Meu Negócio) e no Instagram.
-4. Ao mudar `style.css` ou `main.js`, aumente o número em `?v=3` no `index.html` para os navegadores baixarem a versão nova.
+4. Ao mudar `style.css` ou `main.js`, aumente o número em `?v=4` no `index.html` para os navegadores baixarem a versão nova.

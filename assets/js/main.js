@@ -9,11 +9,14 @@
 
   /* ---------- Topo: entrada do título ---------- */
   const ready = () => requestAnimationFrame(() => document.body.classList.add('is-ready'));
-  if (document.fonts && document.fonts.ready) {
-    Promise.race([document.fonts.ready, new Promise(r => setTimeout(r, 700))]).then(ready);
-  } else {
-    ready();
-  }
+  // se a tela de abertura está na frente, o título só entra quando ela começa a subir
+  const splashGone = new Promise(r => {
+    if (!document.documentElement.classList.contains('splash-on') || window.__belcorSplash === 'out') return r();
+    document.addEventListener('belcor:splash-out', () => setTimeout(r, 180), { once: true });
+    setTimeout(r, 3500);
+  });
+  const fontsReady = (document.fonts && document.fonts.ready) ? Promise.race([document.fonts.ready, new Promise(r => setTimeout(r, 700))]) : Promise.resolve();
+  Promise.all([fontsReady, splashGone]).then(ready);
 
   // Ondulação das letras: pausa quando o topo sai da tela (economiza bateria no celular)
   const rippleSvg = $('#ripple') && $('#ripple').ownerSVGElement;

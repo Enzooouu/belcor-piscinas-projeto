@@ -161,6 +161,63 @@ button, input { font: inherit; color: inherit; }
 .ch-deep .btn-ink { background: #fff; color: var(--ink); }
 
 /* =========================================================================
+   TELA DE ABERTURA — faixas entram pela esquerda, o nome é escrito, a tela sobe
+   Medidas em % do logo original (viewBox 584 × 187), para as faixas caírem
+   exatamente em cima do desenho do logo.
+   ========================================================================= */
+.splash { display: none; }
+.js.splash-on .splash, .splash.is-out {
+  position: fixed; inset: 0; z-index: 100;
+  display: grid; place-items: center;
+  background: var(--navy);
+  /* se o script falhar por algum motivo, a tela sai sozinha depois de 3 s */
+  animation: splashOut .6s cubic-bezier(.7, 0, .2, 1) 3s forwards;
+  cursor: pointer;
+}
+.splash.is-out { animation: splashOut .6s cubic-bezier(.7, 0, .2, 1) forwards; pointer-events: none; }
+.splash-on { overflow: hidden; }   /* sem rolar a página por trás */
+/* a tela azul escorre de baixo para cima, com a borda de baixo arredondada */
+@keyframes splashOut {
+  0% { transform: translateY(0); border-radius: 0; }
+  100% { transform: translateY(-100%); border-radius: 0 0 48px 48px; visibility: hidden; }
+}
+.splash-logo {
+  position: relative;
+  width: min(80vw, 440px); aspect-ratio: 584.1 / 187.1;
+  transition: transform .6s cubic-bezier(.7, 0, .2, 1), opacity .4s ease;
+}
+.splash.is-out .splash-logo { transform: translateY(-24px); opacity: 0; }
+
+/* as quatro faixas, com os dois frisos brancos de cada uma */
+.sb {
+  position: absolute; height: 17.64%; width: 25.7%;
+  border-radius: 3px;
+  transform: translateX(-120vw);
+  animation: barIn .55s cubic-bezier(.16, 1, .3, 1) forwards;
+}
+.sb::before, .sb::after {
+  content: ""; position: absolute; top: 12%; height: 76%; width: 1.35%; min-width: 1.5px;
+  border-radius: 1px; background: #fff; opacity: .85;
+}
+.sb::before { left: 4.7%; }
+.sb::after { left: 94%; }
+.sb1 { left: .69%;  top: 15.93%; background: var(--cyan); animation-delay: .05s; }
+.sb2 { left: 4.28%; top: 34.64%; background: var(--cyan-2); animation-delay: .13s; }
+.sb3 { left: 9.76%; top: 53.35%; background: var(--lavender); width: 25.85%; animation-delay: .21s; }
+.sb4 { left: 17.12%; top: 71.53%; background: var(--royal); animation-delay: .29s; }
+@keyframes barIn { to { transform: translateX(0); } }
+
+/* o nome: duas cópias do logo, cada uma mostra só uma palavra,
+   reveladas por um corte inclinado (como a letra cursiva) que anda da esquerda para a direita */
+.sw { position: absolute; inset: 0; width: 100%; height: 100%; }
+.sw1 { clip-path: polygon(36% 0, 36% 0, 36% 54.5%, 36% 54.5%); animation: writeBelcor .36s cubic-bezier(.45, 0, .55, 1) .36s forwards; }
+.sw2 { clip-path: polygon(45% 47%, 45% 47%, 45% 100%, 45% 100%); animation: writePiscinas .42s cubic-bezier(.45, 0, .55, 1) .66s forwards; }
+@keyframes writeBelcor { to { clip-path: polygon(36% 0, 92% 0, 86% 54.5%, 36% 54.5%); } }
+@keyframes writePiscinas { to { clip-path: polygon(45% 47%, 106% 47%, 100% 100%, 45% 100%); } }
+
+@media (prefers-reduced-motion: reduce) { .splash { display: none !important; } }
+
+/* =========================================================================
    CABEÇALHO FIXO — acompanha a página; transparente sobre a foto, sólido depois
    ========================================================================= */
 .site-header {

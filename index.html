@@ -33,8 +33,16 @@
   <link rel="preload" as="image" href="assets/img/hero-828.webp" media="(max-width: 767px)" fetchpriority="high">
   <link rel="preload" as="image" href="assets/img/hero-1920.webp" media="(min-width: 768px)" fetchpriority="high">
 
-  <link rel="stylesheet" href="assets/css/style.css?v=3">
-  <script>document.documentElement.classList.add('js')</script>
+  <link rel="stylesheet" href="assets/css/style.css?v=4">
+  <script>
+    document.documentElement.classList.add('js');
+    // Tela de abertura: só na primeira visita da sessão e nunca para quem pediu menos animação no celular
+    try {
+      if (!sessionStorage.getItem('belcor-abertura') && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.documentElement.classList.add('splash-on');
+      }
+    } catch (e) {}
+  </script>
 
   <script type="application/ld+json">
   {
@@ -133,6 +141,41 @@
 </head>
 <body>
   <a class="skip" href="#conteudo">Pular para o conteúdo</a>
+
+  <!-- ===================================================== TELA DE ABERTURA
+       Aparece só na primeira visita da sessão. Fica no mínimo 1,35 s (tempo de escrever o nome) e no máximo 1,65 s, depois sobe em 0,6 s.
+       Tocar na tela pula a animação. As faixas são desenhadas em CSS; o nome usa o mesmo arquivo do logo do cabeçalho. -->
+  <div class="splash" data-splash aria-hidden="true">
+    <div class="splash-logo">
+      <span class="sb sb1"></span>
+      <span class="sb sb2"></span>
+      <span class="sb sb3"></span>
+      <span class="sb sb4"></span>
+      <img class="sw sw1" src="assets/img/logo-belcor.svg" width="584" height="187" alt="" decoding="async">
+      <img class="sw sw2" src="assets/img/logo-belcor.svg" width="584" height="187" alt="" decoding="async">
+    </div>
+  </div>
+  <script>
+    (function () {
+      var root = document.documentElement, el = document.querySelector('[data-splash]');
+      if (!el || !root.classList.contains('splash-on')) return;
+      try { sessionStorage.setItem('belcor-abertura', '1'); } catch (e) {}
+      var start = Date.now(), MIN = 1350, MAX = 1650, done = false, loaded = false;
+      function out() {
+        if (done) return; done = true;
+        el.classList.add('is-out');
+        root.classList.remove('splash-on');
+        window.__belcorSplash = 'out';
+        document.dispatchEvent(new Event('belcor:splash-out'));
+        setTimeout(function () { el.remove(); }, 700);
+      }
+      function check() { var t = Date.now() - start; if ((loaded && t >= MIN) || t >= MAX) out(); }
+      window.addEventListener('load', function () { loaded = true; check(); });
+      setTimeout(check, MIN); setTimeout(out, MAX);
+      el.addEventListener('click', out);   // tocar pula a abertura
+    })();
+  </script>
+
 
   <!-- Desenhos compartilhados: estampas de vinil (exemplos), efeito de água e ícones -->
   <svg class="defs" width="0" height="0" aria-hidden="true" focusable="false">
@@ -967,6 +1010,6 @@
     <symbol id="i-stars" viewBox="0 0 100 20"><use href="#i-star" x="0" width="20" height="20"/><use href="#i-star" x="20" width="20" height="20"/><use href="#i-star" x="40" width="20" height="20"/><use href="#i-star" x="60" width="20" height="20"/><use href="#i-star" x="80" width="20" height="20"/></symbol>
   </svg>
 
-  <script src="assets/js/main.js?v=3" defer></script>
+  <script src="assets/js/main.js?v=4" defer></script>
 </body>
 </html>
