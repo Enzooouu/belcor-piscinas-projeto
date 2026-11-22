@@ -5,6 +5,30 @@ Protótipo de site de uma página para a **Belcor Piscinas** (Sorocaba/SP), feit
 - HTML, CSS e JavaScript puros, sem framework e sem etapa de build: abre rápido no celular.
 - Para ver o site, abra o `index.html` no navegador ou publique a pasta em qualquer hospedagem estática (Netlify, Vercel, GitHub Pages, Hostinger…).
 
+## Como abrir e testar no seu computador
+
+**Jeito mais simples:** dê dois cliques no arquivo `index.html`. Ele abre no navegador e quase tudo funciona.
+Só o mapa do Google e os botões de WhatsApp precisam de internet.
+
+**Jeito recomendado (igual a um site de verdade):** rode um servidor local. Precisa do Python, que já vem no Mac e no Linux (no Windows, instale pelo python.org).
+
+1. Abra o terminal (no Windows: PowerShell) dentro da pasta do projeto.
+2. Rode:
+   ```
+   python -m http.server 8000
+   ```
+   (no Mac/Linux, se não funcionar, use `python3` no lugar de `python`)
+3. Abra no navegador: http://localhost:8000
+4. Para parar o servidor, volte ao terminal e aperte `Ctrl + C`.
+
+**Para ver como fica no celular:** no Chrome, aperte `F12`, depois `Ctrl + Shift + M` e escolha um celular na barra de cima (por exemplo, "iPhone 12 Pro", 390 px de largura).
+
+**Para testar no seu próprio celular:** com o servidor rodando e o celular no mesmo Wi-Fi, abra `http://IP-DO-SEU-COMPUTADOR:8000` no celular (o IP aparece em `ipconfig` no Windows ou `ifconfig` no Mac/Linux).
+
+## Por que não usei Astro (ou outro framework)
+
+O site é uma página só, sem banco de dados e sem páginas repetidas. Um framework como o Astro ajuda quando há muitas páginas com partes iguais (cabeçalho, rodapé, cartões repetidos). Aqui ele traria mais coisas para instalar e entender (Node.js, `npm install`, `npm run build`, uma pasta `dist/` para publicar), sem deixar o site mais rápido: ele já é estático e leve. Para quem está começando, editar um `index.html` e ver o resultado na hora é mais simples. Se um dia o site ganhar várias páginas (uma por serviço, um blog), aí vale migrar.
+
 ## Estrutura
 
 ```
@@ -16,17 +40,19 @@ assets/img/           fotos (todas provisórias) e favicon
 
 ## Seções
 
-- **Cabeçalho fixo**: acompanha a página. Fica transparente sobre a foto do topo e ganha fundo azul-marinho quando a pessoa rola. No celular, os links ficam num menu.
+- **Cabeçalho fixo**: acompanha a página. Fica transparente sobre a foto do topo e ganha fundo branco quando a pessoa rola. Abaixo de 1200 px de largura, os links ficam num menu.
 1. **Topo**: foto em tela cheia, o lema "Seu lazer em boas mãos" com a parte de baixo das letras ondulando como se estivesse debaixo d'água, e o botão "Pedir orçamento no WhatsApp".
-2. **Serviços**: uma lista com espaço para respirar: construção, instalação e troca de vinil, estampas e reformas, cada um com sua foto. Cada link "Orçar…" já marca o serviço no simulador.
+2. **Serviços**: construção, instalação e troca de vinil, estampas e reformas. No celular, foto pequena ao lado do texto. Cada link "Orçar…" já marca o serviço no simulador.
 3. **Antes e depois**: um slider que se arrasta com o dedo, com o mouse ou com as setas do teclado.
+3b. **Obras da Belcor**: fileira de 8 fotos que desliza para o lado (setas no computador). Cada foto abre grande ao tocar. No fim, botão para o Instagram.
 4. **Escolha a estampa**: cabe numa tela só. Ao tocar numa amostra, aparece uma piscina pronta em 3D (deque de pedra, borda, paredes e fundo) revestida com aquela estampa: a água baixa, o revestimento troca e a piscina enche de novo. O botão "Usar no orçamento" leva a escolha para o simulador.
-5. **Monte seu orçamento**: serviço, tamanho aproximado, medidas, estampa, nome e bairro. O visitante vê a mensagem como ela vai chegar e o botão abre o WhatsApp `(15) 98824-0116` com o texto pronto. Nenhum preço aparece.
+5. **Monte seu orçamento**: serviço, tamanho aproximado, medidas, estampa, nome, bairro e observações. Nada vem marcado: a mensagem só leva o que a pessoa escolheu. Se o serviço for Reforma, a estampa some. O botão abre o WhatsApp `(15) 98824-0116` com o texto pronto. Nenhum preço aparece.
 6. **Do contato à entrega**: as quatro etapas (contato, visita, execução e entrega). No computador, o painel abre ao passar o mouse, com o texto logo abaixo do título e a foto ao lado. No celular, abre ao tocar.
-7. **Nota 5,0 no Google**: a nota, as 61 avaliações, o que os clientes elogiam e uma fileira de avaliações rolando para a direita (pausa ao passar o mouse). Os textos ainda são provisórios, à espera das avaliações reais.
-8. **Sorocaba e região**: endereço, horário, WhatsApp e mapa do Google com o botão "Como chegar".
-9. **WhatsApp fixo** no canto da tela. Ele some enquanto o botão do topo está visível, para não aparecer duas vezes.
-10. **Rodapé**: o telefone em letras grandes, endereço, horário e Instagram @belcorpiscinas.
+7. **Nota 5,0 no Google**: a nota, as 61 avaliações, o que os clientes elogiam e uma fileira de avaliações que a pessoa desliza com o dedo (setas no computador). Os textos ainda são provisórios, à espera das avaliações reais.
+7b. **Perguntas frequentes**: seis perguntas em sanfona (preço, prazo, garantia, o que é vinil, troca x instalação, cidades). Também vão para o Google como dados estruturados (FAQPage).
+8. **Sorocaba e região**: endereço, horário, WhatsApp, botão Ligar, Como chegar e mapa do Google.
+9. **WhatsApp fixo** no canto da tela. Ele some quando outro botão de contato está visível ou enquanto a pessoa digita no orçamento.
+10. **Rodapé**: logo, o telefone em letras grandes (toque para ligar), Instagram e Voltar ao topo.
 
 ## Antes de publicar: o que trocar
 
@@ -45,7 +71,9 @@ Todos os pontos estão marcados no `index.html` com comentários `TROCAR`.
 | Estampas de vinil | `index.html`, padrões `p-…` e amostras `.swatch` | São 8 desenhos **ilustrativos** com nomes genéricos. Troque pelo catálogo real: pode ser uma foto de cada amostra no lugar do desenho. |
 | Foto real de obra por estampa | `index.html`, amostras `.swatch` | Coloque `data-obra="assets/img/obras/nome.webp"` no `<input>` da amostra e a foto da obra aparece no lugar da piscina desenhada. |
 | Cores da marca | `assets/css/style.css`, bloco `:root` | Tiradas do logo: azul-marinho #013b5e, as quatro faixas (#48e0fa, #92f7fe, #a3bae4, #2252bf) e o amarelo do lema nas estrelas. |
-| Avaliações do Google | `index.html`, seção `avaliacoes` | A fileira que rola tem 6 cartões com texto provisório. Troque iniciais, nome, texto e data pelas avaliações reais, nas duas listas (a segunda é a cópia que fecha o laço). |
+| Avaliações do Google | `index.html`, seção `avaliacoes` | 6 cartões com texto provisório. Troque iniciais, nome, texto e data pelas avaliações reais. |
+| Galeria de obras | `index.html`, seção `obras` | 8 fotos provisórias (`TROCAR FOTO`) e legendas inventadas como exemplo (`CONFIRMAR COM O DONO`). Para cada obra nova, gere também uma versão de 640 px com `-640` no nome. |
+| Perguntas frequentes | `index.html`, seção `duvidas` **e** o bloco `FAQPage` no `<head>` | Respostas provisórias. Mude nos dois lugares, com o mesmo texto. |
 
 Ao trocar uma foto, salve em `.webp` com qualidade de 60 a 75 para o site continuar leve.
 
@@ -68,7 +96,7 @@ Todas são do [Unsplash](https://unsplash.com/license), de uso livre. Nenhuma mo
 
 Só informações públicas da empresa: nome, lema, serviços, área atendida, endereço, WhatsApp, horário, Instagram e a nota 5,0 com 61 avaliações no Google (com os pontos elogiados). Não há anos de mercado, número de obras, prêmios nem depoimentos.
 
-Os textos que descrevem as etapas (por exemplo, "a equipe vai até o local para medir") são uma suposição razoável do processo. Confirme com o dono antes de publicar.
+Os textos que descrevem as etapas (por exemplo, "a equipe vai até o local para medir"), as respostas das perguntas frequentes, as legendas da galeria e as explicações do formulário são suposições razoáveis. Tudo está marcado com `CONFIRMAR COM O DONO` no `index.html`: procure por essa frase (Ctrl + F) e confira com o dono antes de publicar.
 
 ## Logo
 
