@@ -27,6 +27,18 @@
     }
   }
 
+  // ondulação das letras só depois que a página terminou de carregar (não atrasa a primeira pintura)
+  const startRipple = () => setTimeout(() => document.documentElement.classList.add('ripple-on'), 400);
+  if (!reduceMotion) { if (document.readyState === 'complete') startRipple(); else window.addEventListener('load', startRipple, { once: true }); }
+
+  // animações contínuas (reflexo da água, fileira de avaliações) só rodam quando estão na tela
+  if ('IntersectionObserver' in window) {
+    const liveIO = new IntersectionObserver((entries) => entries.forEach(e => e.target.classList.toggle('is-live', e.isIntersecting)), { rootMargin: '100px' });
+    $$('.obra, .reviews').forEach(el => liveIO.observe(el));
+  } else {
+    $$('.obra, .reviews').forEach(el => el.classList.add('is-live'));
+  }
+
   /* ---------- Entradas das seções ---------- */
   const revealEls = $$('[data-reveal]');
   if ('IntersectionObserver' in window && !reduceMotion) {

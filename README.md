@@ -83,3 +83,25 @@ O logo foi redesenhado em vetor a partir da arte enviada pela Belcor. As quatro 
 | `logo/belcor-logo-branco-fundo-azul.png` | 3600 px, já com o fundo azul-marinho #013b5e |
 
 Cores: #48e0fa, #92f7fe, #a3bae4, #2252bf e o fundo #013b5e.
+
+## Velocidade e SEO
+
+Medido com o Lighthouse (o mesmo do Google PageSpeed), simulando um celular:
+
+| | Antes | Depois |
+| --- | --- | --- |
+| Desempenho | 83 | 99 |
+| Acessibilidade | 100 | 100 |
+| Boas práticas | 100 | 100 |
+| SEO | 100 | 100 |
+| Primeira pintura | 1,7 s | 0,8 s |
+| Maior elemento na tela | 3,5 s | 2,1 s |
+| Tempo travado | 320 ms | 0 ms |
+
+O que foi feito: fonte hospedada no próprio site, fotos em duas larguras (o celular baixa a de 640 px), animações que só rodam quando estão na tela, dados estruturados da empresa (Google), título e descrição com "piscinas em Sorocaba", `robots.txt`, `sitemap.xml` e arquivos de cache/compressão para Apache (`.htaccess`), Netlify (`netlify.toml`) e Vercel (`vercel.json`).
+
+**Ao publicar:**
+1. Troque `https://www.SEUDOMINIO.com.br` pelo endereço real em `index.html`, `robots.txt` e `sitemap.xml`.
+2. Cadastre o site no Google Search Console e envie o `sitemap.xml`.
+3. Coloque o endereço do site no perfil da Belcor no Google (Google Meu Negócio) e no Instagram.
+4. Ao mudar `style.css` ou `main.js`, aumente o número em `?v=2` no `index.html` para os navegadores baixarem a versão nova.

@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# QUANDO PUBLICAR: troque pelo endereço real do site
+Sitemap: https://www.SEUDOMINIO.com.br/sitemap.xml
