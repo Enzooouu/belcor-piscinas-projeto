@@ -575,10 +575,10 @@
         <form class="quote-form" data-quote action="https://wa.me/5515988240116" method="get" target="_blank" data-reveal>
           <div class="q-group" role="radiogroup" aria-labelledby="q-servico">
             <p class="q-label" id="q-servico">Qual serviço?</p>
-            <div class="chips">
-              <label class="chip"><input type="radio" name="servico" value="Construção de piscina" checked><span>Construção de piscina</span></label>
-              <label class="chip"><input type="radio" name="servico" value="Troca de vinil"><span>Troca de vinil</span></label>
-              <label class="chip"><input type="radio" name="servico" value="Instalação de vinil"><span>Instalação de vinil</span></label>
+            <div class="chips chips-service">
+              <label class="chip"><input type="radio" name="servico" value="Construção de piscina"><span>Construção de piscina</span></label>
+              <label class="chip"><input type="radio" name="servico" value="Troca de vinil"><span>Troca de vinil <small>a piscina já tem vinil</small></span></label>
+              <label class="chip"><input type="radio" name="servico" value="Instalação de vinil"><span>Instalação de vinil <small>piscina nova ou de azulejo</small></span></label>
               <label class="chip"><input type="radio" name="servico" value="Reforma"><span>Reforma</span></label>
               <label class="chip"><input type="radio" name="servico" value="Ainda não sei"><span>Ainda não sei</span></label>
             </div>
@@ -586,10 +586,10 @@
 
           <div class="q-group" role="radiogroup" aria-labelledby="q-tamanho">
             <p class="q-label" id="q-tamanho">Tamanho aproximado da piscina</p>
-            <div class="chips">
-              <label class="chip"><input type="radio" name="tamanho" value="Pequena (até 4 × 2 m, ~11 m³)"><span>Pequena <small>até 4 × 2 m · ~11 m³</small></span></label>
-              <label class="chip"><input type="radio" name="tamanho" value="Média (até 6 × 3 m, ~25 m³)" checked><span>Média <small>até 6 × 3 m · ~25 m³</small></span></label>
-              <label class="chip"><input type="radio" name="tamanho" value="Grande (acima de 6 × 3 m, 25 m³ ou mais)"><span>Grande <small>acima de 6 × 3 m · 25 m³ ou mais</small></span></label>
+            <div class="chips chips-size">
+              <label class="chip"><input type="radio" name="tamanho" value="Pequena (até 4 × 2 m, ~11 m³)"><span>Pequena <small>até 4×2 m · 11 m³</small></span></label>
+              <label class="chip"><input type="radio" name="tamanho" value="Média (até 6 × 3 m, ~25 m³)"><span>Média <small>até 6×3 m · 25 m³</small></span></label>
+              <label class="chip"><input type="radio" name="tamanho" value="Grande (acima de 6 × 3 m, 25 m³ ou mais)"><span>Grande <small>mais de 6×3 m</small></span></label>
               <label class="chip"><input type="radio" name="tamanho" value="Não sei o tamanho"><span>Não sei</span></label>
             </div>
             <div class="dims" role="group" aria-labelledby="dims-label">
@@ -605,10 +605,10 @@
             </div>
           </div>
 
-          <div class="q-group" role="radiogroup" aria-labelledby="q-estampa">
+          <div class="q-group" role="radiogroup" aria-labelledby="q-estampa" data-prints-group>
             <p class="q-label" id="q-estampa">Estampa do vinil</p>
             <div class="chips chips-prints">
-              <label class="chip"><input type="radio" name="estampa" value="Pastilha azul" checked><span><i class="dot" ><svg width="100%" height="100%"><rect width="100%" height="100%" fill="url(#p-pastilha-azul)"/></svg></i>Pastilha azul</span></label>
+              <label class="chip"><input type="radio" name="estampa" value="Pastilha azul"><span><i class="dot" ><svg width="100%" height="100%"><rect width="100%" height="100%" fill="url(#p-pastilha-azul)"/></svg></i>Pastilha azul</span></label>
               <label class="chip"><input type="radio" name="estampa" value="Pastilha verde-água"><span><i class="dot"><svg width="100%" height="100%"><rect width="100%" height="100%" fill="url(#p-pastilha-verde)"/></svg></i>Pastilha verde-água</span></label>
               <label class="chip"><input type="radio" name="estampa" value="Mosaico"><span><i class="dot"><svg width="100%" height="100%"><rect width="100%" height="100%" fill="url(#p-mosaico)"/></svg></i>Mosaico</span></label>
               <label class="chip"><input type="radio" name="estampa" value="Azul liso"><span><i class="dot"><svg width="100%" height="100%"><rect width="100%" height="100%" fill="url(#p-liso)"/></svg></i>Azul liso</span></label>
@@ -624,18 +624,18 @@
             <p class="q-label" id="q-dados">Seus dados <small>(opcional)</small></p>
             <label class="field">
               <span class="field-label">Nome</span>
-              <input type="text" name="nome" autocomplete="name" placeholder="Como podemos te chamar?">
+              <input type="text" name="nome" autocomplete="name" placeholder="Seu nome">
             </label>
             <label class="field">
               <span class="field-label">Bairro e cidade</span>
-              <input type="text" name="local" autocomplete="address-level2" placeholder="ex.: Campolim, Sorocaba">
+              <input type="text" name="local" autocomplete="address-level2" placeholder="ex.: Campolim">
             </label>
           </div>
 
           <div class="q-group">
             <label class="field">
               <span class="q-label">Quer contar mais alguma coisa? <small>(opcional)</small></span>
-              <textarea name="obs" rows="3" placeholder="ex.: a piscina está vazando, quero aquecimento, prefiro visita no sábado…"></textarea>
+              <textarea name="obs" rows="2" placeholder="ex.: a piscina está vazando, quero aquecimento, prefiro visita no sábado…"></textarea>
             </label>
           </div>
 

@@ -121,21 +121,28 @@
     if (!form) return '';
     const fd = new FormData(form);
     const get = (k) => (fd.get(k) || '').toString().trim();
-    const lines = ['Olá, Belcor! Vim pelo site e gostaria de um orçamento.', ''];
-    lines.push(`*Serviço:* ${get('servico')}`);
+    const lines = ['Olá, Belcor! Vim pelo site e gostaria de um orçamento.'];
+    const details = [];
+    // só entra na mensagem o que a pessoa realmente escolheu
+    if (get('servico')) details.push(`*Serviço:* ${get('servico')}`);
     const d = dims();
-    if (d.text) lines.push(`*Medidas:* ${d.text}`);
-    else if (get('tamanho')) lines.push(`*Tamanho aproximado:* ${get('tamanho')}`);
-    if (get('estampa')) lines.push(`*Estampa do vinil:* ${get('estampa')}`);
-    if (get('nome')) lines.push(`*Nome:* ${get('nome')}`);
-    if (get('local')) lines.push(`*Bairro/cidade:* ${get('local')}`);
+    if (d.text) details.push(`*Medidas:* ${d.text}`);
+    else if (get('tamanho')) details.push(`*Tamanho aproximado:* ${get('tamanho')}`);
+    // reforma não leva estampa
+    if (get('estampa') && get('servico') !== 'Reforma') details.push(`*Estampa do vinil:* ${get('estampa')}`);
+    if (get('nome')) details.push(`*Nome:* ${get('nome')}`);
+    if (get('local')) details.push(`*Bairro/cidade:* ${get('local')}`);
+    if (details.length) lines.push('', ...details);
     if (get('obs')) lines.push('', `*Mais detalhes:* ${get('obs')}`);
     return lines.join('\n');
   };
 
   const escapeHtml = (s) => s.replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
+  const printsGroup = $('[data-prints-group]');
   const updateQuote = () => {
+    // esconde a escolha de estampa quando o serviço é reforma
+    if (printsGroup && form) printsGroup.hidden = (new FormData(form).get('servico') === 'Reforma');
     const msg = buildMessage();
     if (preview) preview.innerHTML = escapeHtml(msg).replace(/\*(.+?)\*/g, '<b>$1</b>');
     if (sendBtn) sendBtn.href = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
@@ -196,9 +203,9 @@
   if (usePrint) usePrint.addEventListener('click', () => {
     const chosen = $('input[name="estampa-galeria"]:checked');
     if (chosen) selectRadio('estampa', chosen.value);
-    // quem escolhe estampa normalmente quer vinil novo
+    // quem escolhe estampa quer vinil novo: sem serviço marcado (ou reforma / ainda não sei), marca troca de vinil
     const svc = form && $('input[name="servico"]:checked', form);
-    if (svc && (svc.value === 'Construção de piscina' || svc.value === 'Ainda não sei')) selectRadio('servico', 'Troca de vinil');
+    if (!svc || svc.value === 'Reforma' || svc.value === 'Ainda não sei') selectRadio('servico', 'Troca de vinil');
   });
 
   /* ---------- Como funciona: sanfona (abre ao passar o mouse no computador) ---------- */
