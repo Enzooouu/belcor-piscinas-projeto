@@ -230,6 +230,24 @@
     });
   }
 
+  /* ---------- Fileiras deslizantes (obras e avaliações): setas de anterior/próximo ---------- */
+  $$('[data-carousel]').forEach(car => {
+    const track = $('[data-carousel-track]', car);
+    const prev = $('[data-carousel-prev]', car);
+    const next = $('[data-carousel-next]', car);
+    if (!track || !prev || !next) return;
+    const step = () => { const item = track.children[0]; return item ? item.getBoundingClientRect().width + 12 : track.clientWidth * 0.8; };
+    const update = () => {
+      prev.disabled = track.scrollLeft < 4;
+      next.disabled = track.scrollLeft + track.clientWidth > track.scrollWidth - 4;
+    };
+    prev.addEventListener('click', () => track.scrollBy({ left: -step(), behavior: reduceMotion ? 'auto' : 'smooth' }));
+    next.addEventListener('click', () => track.scrollBy({ left: step(), behavior: reduceMotion ? 'auto' : 'smooth' }));
+    track.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+  });
+
   /* ---------- Perguntas frequentes: abre uma de cada vez ---------- */
   const faqs = $$('[data-faq]');
   faqs.forEach(d => d.addEventListener('toggle', () => {
@@ -335,11 +353,13 @@
       opener = img;
       lbImg.src = img.currentSrc || img.src;
       lbImg.alt = img.alt;
-      lbCap.textContent = img.alt;
+      // nas obras, mostra a legenda da obra; nas outras fotos, a descrição
+      const fc = img.closest('figure') && img.closest('figure').querySelector('figcaption');
+      lbCap.textContent = fc ? fc.textContent : img.alt;
       setZoom(false);
       lb.showModal();
     };
-    $$('.service-media img, .step-body img, .t-photo img').forEach(img => {
+    $$('.service-media img, .step-body img, .t-photo img, .gallery-item img').forEach(img => {
       img.setAttribute('data-zoomable', '');
       img.tabIndex = 0;
       img.setAttribute('role', 'button');

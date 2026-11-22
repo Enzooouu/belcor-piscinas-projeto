@@ -189,7 +189,7 @@ button, input { font: inherit; color: inherit; }
 }
 .wordmark { display: block; padding: 4px 0; margin-right: auto; line-height: 0; }
 .wordmark img { height: 36px; width: auto; }
-@media (min-width: 1000px) { .wordmark img { height: 40px; } }
+@media (min-width: 1200px) { .wordmark img { height: 40px; } }
 .nav-cta { flex: none; }
 .menu-btn {
   width: 44px; height: 44px; flex: none;
@@ -222,7 +222,7 @@ button, input { font: inherit; color: inherit; }
   transition: background-color var(--dur) ease;
 }
 .nav-links a:hover { background: var(--tint); }
-@media (min-width: 1000px) {
+@media (min-width: 1200px) {
   .menu-btn { display: none; }
   .wordmark { margin-right: 0; }
   .nav-links {
@@ -393,6 +393,56 @@ button, input { font: inherit; color: inherit; }
   .compare { grid-column: 5 / -1; }
   .compare-stage { aspect-ratio: 14 / 9; }
 }
+
+/* =========================================================================
+   3B. OBRAS DA BELCOR — fileira de fotos que desliza para o lado
+   ========================================================================= */
+.gallery .wrap { padding-top: clamp(56px, 6vw, 104px); padding-bottom: 28px; }
+@media (min-width: 900px) { .gallery-track { grid-auto-columns: 300px; } }
+.gallery-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; }
+.gallery-head .lead { max-width: 34ch; }
+
+/* setas (só no computador; no celular a pessoa desliza com o dedo) */
+.carousel-arrows { display: none; gap: 8px; flex: none; }
+.arrow {
+  width: 52px; height: 52px; border: 0; border-radius: 50%; cursor: pointer;
+  display: grid; place-items: center;
+  background: var(--navy); color: #fff;
+  transition: background-color var(--dur) ease, transform var(--dur) var(--ease-out), opacity var(--dur) ease;
+}
+.arrow:hover { background: var(--royal); }
+.arrow:active { transform: scale(.94); }
+.arrow:disabled { opacity: .35; cursor: default; background: var(--navy); }
+.arrow svg { width: 22px; height: 22px; }
+@media (min-width: 900px) and (hover: hover) { .carousel-arrows { display: flex; } }
+
+/* trilho deslizante: começa na margem da página e corre até a borda da tela */
+.gallery-track {
+  display: grid; grid-auto-flow: column; grid-auto-columns: min(78vw, 360px); gap: 12px;
+  overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scrollbar-width: none;
+  padding: 0 var(--pad-x) clamp(56px, 6vw, 96px); scroll-padding-inline: var(--pad-x);
+}
+.gallery-track::-webkit-scrollbar { display: none; }
+.gallery-item { scroll-snap-align: start; }
+.gallery-item figure { margin: 0; display: grid; gap: 10px; }
+.gallery-item img {
+  width: 100%; aspect-ratio: 4 / 5; object-fit: cover;
+  border-radius: var(--r-lg); background: var(--tint);
+  transition: transform .6s var(--ease-out);
+}
+.gallery-item img:hover { transform: scale(1.015); }
+.gallery-item figcaption { font-size: 1rem; font-weight: 600; color: var(--ink); padding: 0 4px; }
+.gallery-insta {
+  height: 100%; min-height: 240px; aspect-ratio: 4 / 5;
+  display: flex; flex-direction: column; justify-content: flex-end; gap: 8px;
+  padding: 24px; border-radius: var(--r-lg);
+  background: var(--navy); color: #fff; text-decoration: none;
+  font-size: var(--step-lead); font-weight: 600; letter-spacing: -0.02em; line-height: 1.15;
+  transition: background-color var(--dur) ease;
+}
+.gallery-insta .ico { width: 40px; height: 40px; margin-bottom: auto; }
+.gallery-insta-user { font-size: 1rem; font-weight: 500; color: var(--cyan-2); }
+.gallery-insta:hover { background: var(--royal); }
 
 /* =========================================================================
    4. ESTAMPAS — cabe numa tela: amostras à esquerda, a obra à direita
