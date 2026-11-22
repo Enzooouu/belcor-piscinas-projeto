@@ -37,9 +37,9 @@
   // o reflexo da água na piscina 3D só se mexe quando ela está na tela
   if ('IntersectionObserver' in window) {
     const liveIO = new IntersectionObserver((entries) => entries.forEach(e => e.target.classList.toggle('is-live', e.isIntersecting)), { rootMargin: '100px' });
-    $$('.obra').forEach(el => liveIO.observe(el));
+    $$('.obra, .reviews').forEach(el => liveIO.observe(el));
   } else {
-    $$('.obra').forEach(el => el.classList.add('is-live'));
+    $$('.obra, .reviews').forEach(el => el.classList.add('is-live'));
   }
 
   /* ---------- Entradas das seções ---------- */
@@ -240,22 +240,62 @@
     });
   }
 
-  /* ---------- Fileiras deslizantes (obras e avaliações): setas de anterior/próximo ---------- */
+  /* ---------- Fileira de obras: setas, laço infinito e avanço automático ---------- */
   $$('[data-carousel]').forEach(car => {
     const track = $('[data-carousel-track]', car);
     const prev = $('[data-carousel-prev]', car);
     const next = $('[data-carousel-next]', car);
-    if (!track || !prev || !next) return;
-    const step = () => { const item = track.children[0]; return item ? item.getBoundingClientRect().width + 12 : track.clientWidth * 0.8; };
+    if (!track) return;
+    const loop = car.hasAttribute('data-carousel-loop');
+    const GAP = 12;
+    let setWidth = 0;
+    if (loop) {
+      // cópias antes e depois da lista original: quando a pessoa chega numa cópia, pula sem ela perceber para o mesmo ponto da original
+      const originals = Array.from(track.children);
+      const clone = (el) => { const c = el.cloneNode(true); c.setAttribute('aria-hidden', 'true'); c.setAttribute('data-clone', ''); $$('a, button', c).forEach(a => a.tabIndex = -1); return c; };
+      originals.slice().reverse().forEach(el => track.prepend(clone(el)));
+      originals.forEach(el => track.append(clone(el)));
+      const measure = () => { setWidth = originals[0].offsetLeft - track.children[0].offsetLeft; };
+      measure();
+      track.scrollLeft = setWidth;
+      const wrap = () => {
+        if (track.scrollLeft < setWidth * 0.5) track.scrollLeft += setWidth;
+        else if (track.scrollLeft > setWidth * 1.5) track.scrollLeft -= setWidth;
+      };
+      let t;
+      track.addEventListener('scroll', () => { clearTimeout(t); t = setTimeout(wrap, 140); }, { passive: true });
+      window.addEventListener('resize', () => { const k = setWidth ? track.scrollLeft / setWidth : 1; measure(); track.scrollLeft = setWidth * k; });
+    }
+    const step = () => { const item = track.children[0]; return item ? item.getBoundingClientRect().width + GAP : track.clientWidth * 0.8; };
+    const go = (dir) => track.scrollBy({ left: dir * step(), behavior: reduceMotion ? 'auto' : 'smooth' });
     const update = () => {
+      if (loop || !prev || !next) return;
       prev.disabled = track.scrollLeft < 4;
       next.disabled = track.scrollLeft + track.clientWidth > track.scrollWidth - 4;
     };
-    prev.addEventListener('click', () => track.scrollBy({ left: -step(), behavior: reduceMotion ? 'auto' : 'smooth' }));
-    next.addEventListener('click', () => track.scrollBy({ left: step(), behavior: reduceMotion ? 'auto' : 'smooth' }));
+    if (prev) prev.addEventListener('click', () => { go(-1); restart(); });
+    if (next) next.addEventListener('click', () => { go(1); restart(); });
     track.addEventListener('scroll', update, { passive: true });
-    window.addEventListener('resize', update);
     update();
+
+    // avança sozinho; para enquanto a pessoa mexe, passa o mouse, está com o foco ou a fileira está fora da tela
+    const every = parseInt(car.dataset.carouselAuto || '0', 10);
+    let timer = null, visible = false, hold = false;
+    function restart() {
+      clearInterval(timer); timer = null;
+      if (!every || reduceMotion || !visible || hold) return;
+      timer = setInterval(() => go(1), every);
+    }
+    if (every) {
+      if ('IntersectionObserver' in window) new IntersectionObserver(([e]) => { visible = e.isIntersecting; restart(); }, { threshold: 0.3 }).observe(track);
+      const pause = () => { hold = true; restart(); };
+      const resume = () => { hold = false; restart(); };
+      car.addEventListener('mouseenter', pause); car.addEventListener('mouseleave', resume);
+      car.addEventListener('focusin', pause); car.addEventListener('focusout', resume);
+      track.addEventListener('touchstart', pause, { passive: true });
+      track.addEventListener('touchend', () => setTimeout(resume, 4000), { passive: true });
+      document.addEventListener('visibilitychange', () => { hold = document.hidden; restart(); });
+    }
   });
 
   /* ---------- Perguntas frequentes: abre uma de cada vez ---------- */
@@ -275,7 +315,7 @@
       entries.forEach(e => e.isIntersecting ? onScreen.add(e.target) : onScreen.delete(e.target));
       refresh();
     }, { threshold: 0.1 });
-    $$('.hero-actions, [data-send], .place-actions, .footer-phone').forEach(el => io.observe(el));
+    $$('.hero-actions, [data-send], .place-actions, .footer-phones').forEach(el => io.observe(el));
     if (form) {
       form.addEventListener('focusin', (e) => { if (e.target.matches('input[type=text], textarea')) { typing = true; refresh(); } });
       form.addEventListener('focusout', () => { typing = false; refresh(); });
@@ -382,8 +422,9 @@
     };
     $$('.service-media img, .step-body img, .t-photo img, .gallery-item img').forEach(img => {
       img.setAttribute('data-zoomable', '');
-      img.tabIndex = 0;
-      img.setAttribute('role', 'button');
+      const isClone = !!img.closest('[data-clone]');
+      img.tabIndex = isClone ? -1 : 0;
+      if (!isClone) img.setAttribute('role', 'button');
       img.setAttribute('aria-label', `Ampliar foto: ${img.alt}`);
       img.addEventListener('click', () => open(img));
       img.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(img); } });

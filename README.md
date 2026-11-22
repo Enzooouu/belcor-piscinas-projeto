@@ -45,15 +45,15 @@ assets/img/           fotos (todas provisórias) e favicon
 1. **Topo**: foto em tela cheia, o lema "Seu lazer em boas mãos" com a parte de baixo das letras ondulando como se estivesse debaixo d'água, e o botão "Pedir orçamento no WhatsApp".
 2. **Serviços**: construção, instalação e troca de vinil, estampas e reformas. No celular, foto pequena ao lado do texto. Cada link "Orçar…" já marca o serviço no simulador.
 3. **Antes e depois**: um slider que se arrasta com o dedo, com o mouse ou com as setas do teclado.
-3b. **Obras da Belcor**: fileira de 8 fotos que desliza para o lado (setas no computador). Cada foto abre grande ao tocar. No fim, botão para o Instagram.
+3b. **Obras da Belcor**: fileira de 8 fotos que dá a volta sem fim e avança sozinha a cada 8 s (para quando a pessoa passa o mouse, toca ou sai da seção). Setas no computador. Cada foto abre grande ao tocar. Depois da última, o botão para o Instagram.
 4. **Escolha a estampa**: cabe numa tela só. Ao tocar numa amostra, aparece uma piscina pronta em 3D (deque de pedra, borda, paredes e fundo) revestida com aquela estampa: a água baixa, o revestimento troca e a piscina enche de novo. O botão "Usar no orçamento" leva a escolha para o simulador.
 5. **Monte seu orçamento**: serviço, tamanho aproximado, medidas, estampa, nome, bairro e observações. Nada vem marcado: a mensagem só leva o que a pessoa escolheu. Se o serviço for Reforma, a estampa some. O botão abre o WhatsApp `(15) 98824-0116` com o texto pronto. Nenhum preço aparece.
 6. **Do contato à entrega**: as quatro etapas (contato, visita, execução e entrega). No computador, o painel abre ao passar o mouse, com o texto logo abaixo do título e a foto ao lado. No celular, abre ao tocar.
-7. **Nota 5,0 no Google**: a nota, as 61 avaliações, o que os clientes elogiam e uma fileira de avaliações que a pessoa desliza com o dedo (setas no computador). Os textos ainda são provisórios, à espera das avaliações reais.
+7. **Nota 5,0 no Google**: a nota, as 61 avaliações, o que os clientes elogiam e uma fileira de avaliações que anda sozinha para a direita (para ao passar o mouse ou tocar). Os textos ainda são provisórios, à espera das avaliações reais.
 7b. **Perguntas frequentes**: seis perguntas em sanfona (preço, prazo, garantia, o que é vinil, troca x instalação, cidades). Também vão para o Google como dados estruturados (FAQPage).
 8. **Sorocaba e região**: endereço, horário, WhatsApp, botão Ligar, Como chegar e mapa do Google.
 9. **WhatsApp fixo** no canto da tela. Ele some quando outro botão de contato está visível ou enquanto a pessoa digita no orçamento.
-10. **Rodapé**: logo, o telefone em letras grandes (toque para ligar), Instagram e Voltar ao topo.
+10. **Rodapé**: logo, o número duas vezes (um abre o WhatsApp, o outro liga), cada um com a legenda embaixo, Instagram e Voltar ao topo.
 
 ## Antes de publicar: o que trocar
 
@@ -133,4 +133,4 @@ O que foi feito: fonte hospedada no próprio site, fotos em duas larguras (o cel
 1. Troque `https://www.SEUDOMINIO.com.br` pelo endereço real em `index.html`, `robots.txt` e `sitemap.xml`.
 2. Cadastre o site no Google Search Console e envie o `sitemap.xml`.
 3. Coloque o endereço do site no perfil da Belcor no Google (Google Meu Negócio) e no Instagram.
-4. Ao mudar `style.css` ou `main.js`, aumente o número em `?v=5` no `index.html` para os navegadores baixarem a versão nova.
+4. Ao mudar `style.css` ou `main.js`, aumente o número em `?v=6` no `index.html` para os navegadores baixarem a versão nova.

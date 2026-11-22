@@ -33,7 +33,7 @@
   <link rel="preload" as="image" href="assets/img/hero-828.webp" media="(max-width: 767px)" fetchpriority="high">
   <link rel="preload" as="image" href="assets/img/hero-1920.webp" media="(min-width: 768px)" fetchpriority="high">
 
-  <link rel="stylesheet" href="assets/css/style.css?v=5">
+  <link rel="stylesheet" href="assets/css/style.css?v=6">
   <script>
     document.documentElement.classList.add('js');
     // Tela de abertura: só na primeira visita da sessão e nunca para quem pediu menos animação no celular
@@ -452,7 +452,7 @@
 
     <!-- ===================================================== 3B. OBRAS DA BELCOR -->
     <section class="chapter ch-paper gallery" id="obras" aria-labelledby="obras-titulo">
-      <div class="carousel" data-carousel>
+      <div class="carousel" data-carousel data-carousel-loop data-carousel-auto="8000">
         <div class="wrap gallery-head" data-reveal>
           <div>
             <h2 id="obras-titulo" class="h-section">Obras da Belcor</h2>
@@ -680,7 +680,7 @@
           <div class="q-group">
             <label class="field">
               <span class="q-label">Quer contar mais alguma coisa? <small>(opcional)</small></span>
-              <textarea name="obs" rows="2" placeholder="ex.: a piscina está vazando, quero aquecimento, prefiro visita no sábado…"></textarea>
+              <textarea name="obs" rows="2" maxlength="400" placeholder="ex.: a piscina está vazando, quero aquecimento, prefiro visita no sábado…"></textarea>
             </label>
           </div>
 
@@ -764,99 +764,182 @@
       </div>
 
       <!-- AVALIAÇÕES REAIS: troque nome, iniciais, texto e "há quanto tempo" pelas avaliações do Google da Belcor. -->
-      <div class="reviews" data-carousel data-reveal>
-        <div class="wrap reviews-nav">
-          <div class="carousel-arrows">
-            <button class="arrow" type="button" data-carousel-prev aria-label="Avaliações anteriores"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-            <button class="arrow" type="button" data-carousel-next aria-label="Próximas avaliações"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-          </div>
+      <!-- A segunda lista (aria-hidden) é a cópia que fecha o laço da fileira: mantenha as duas iguais. -->
+      <div class="reviews" data-reveal>
+        <div class="reviews-track">
+          <ul class="reviews-list">
+            <li class="review">
+              <div class="review-head">
+                <span class="review-avatar" aria-hidden="true">NC</span>
+                <div>
+                  <p class="review-name">Nome do cliente</p>
+                  <p class="review-meta">Local Guide · 10 avaliações · 3 fotos</p>
+                </div>
+              </div>
+              <p class="review-text">“Aqui entra o texto de uma avaliação real do Google, do jeito que o cliente escreveu. Textos longos são cortados depois de sete linhas, com reticências no final, para todos os cartões ficarem do mesmo tamanho na fileira que passa pela tela…”</p>
+              <div class="review-foot">
+                <svg class="stars" viewBox="0 0 100 20" role="img" aria-label="5 de 5 estrelas"><use href="#i-stars"/></svg>
+                <span>há 2 meses · Google</span>
+              </div>
+            </li>
+            <li class="review">
+              <div class="review-head">
+                <span class="review-avatar" aria-hidden="true">NC</span>
+                <div>
+                  <p class="review-name">Nome do cliente</p>
+                  <p class="review-meta">Local Guide · 10 avaliações · 3 fotos</p>
+                </div>
+              </div>
+              <p class="review-text">“Aqui entra o texto de uma avaliação real do Google, do jeito que o cliente escreveu. Textos longos são cortados depois de sete linhas, com reticências no final, para todos os cartões ficarem do mesmo tamanho na fileira que passa pela tela…”</p>
+              <div class="review-foot">
+                <svg class="stars" viewBox="0 0 100 20" role="img" aria-label="5 de 5 estrelas"><use href="#i-stars"/></svg>
+                <span>há 2 meses · Google</span>
+              </div>
+            </li>
+            <li class="review">
+              <div class="review-head">
+                <span class="review-avatar" aria-hidden="true">NC</span>
+                <div>
+                  <p class="review-name">Nome do cliente</p>
+                  <p class="review-meta">Local Guide · 10 avaliações · 3 fotos</p>
+                </div>
+              </div>
+              <p class="review-text">“Aqui entra o texto de uma avaliação real do Google, do jeito que o cliente escreveu. Textos longos são cortados depois de sete linhas, com reticências no final, para todos os cartões ficarem do mesmo tamanho na fileira que passa pela tela…”</p>
+              <div class="review-foot">
+                <svg class="stars" viewBox="0 0 100 20" role="img" aria-label="5 de 5 estrelas"><use href="#i-stars"/></svg>
+                <span>há 2 meses · Google</span>
+              </div>
+            </li>
+            <li class="review">
+              <div class="review-head">
+                <span class="review-avatar" aria-hidden="true">NC</span>
+                <div>
+                  <p class="review-name">Nome do cliente</p>
+                  <p class="review-meta">Local Guide · 10 avaliações · 3 fotos</p>
+                </div>
+              </div>
+              <p class="review-text">“Aqui entra o texto de uma avaliação real do Google, do jeito que o cliente escreveu. Textos longos são cortados depois de sete linhas, com reticências no final, para todos os cartões ficarem do mesmo tamanho na fileira que passa pela tela…”</p>
+              <div class="review-foot">
+                <svg class="stars" viewBox="0 0 100 20" role="img" aria-label="5 de 5 estrelas"><use href="#i-stars"/></svg>
+                <span>há 2 meses · Google</span>
+              </div>
+            </li>
+            <li class="review">
+              <div class="review-head">
+                <span class="review-avatar" aria-hidden="true">NC</span>
+                <div>
+                  <p class="review-name">Nome do cliente</p>
+                  <p class="review-meta">Local Guide · 10 avaliações · 3 fotos</p>
+                </div>
+              </div>
+              <p class="review-text">“Aqui entra o texto de uma avaliação real do Google, do jeito que o cliente escreveu. Textos longos são cortados depois de sete linhas, com reticências no final, para todos os cartões ficarem do mesmo tamanho na fileira que passa pela tela…”</p>
+              <div class="review-foot">
+                <svg class="stars" viewBox="0 0 100 20" role="img" aria-label="5 de 5 estrelas"><use href="#i-stars"/></svg>
+                <span>há 2 meses · Google</span>
+              </div>
+            </li>
+            <li class="review">
+              <div class="review-head">
+                <span class="review-avatar" aria-hidden="true">NC</span>
+                <div>
+                  <p class="review-name">Nome do cliente</p>
+                  <p class="review-meta">Local Guide · 10 avaliações · 3 fotos</p>
+                </div>
+              </div>
+              <p class="review-text">“Aqui entra o texto de uma avaliação real do Google, do jeito que o cliente escreveu. Textos longos são cortados depois de sete linhas, com reticências no final, para todos os cartões ficarem do mesmo tamanho na fileira que passa pela tela…”</p>
+              <div class="review-foot">
+                <svg class="stars" viewBox="0 0 100 20" role="img" aria-label="5 de 5 estrelas"><use href="#i-stars"/></svg>
+                <span>há 2 meses · Google</span>
+              </div>
+            </li>
+          </ul>
+          <ul class="reviews-list" aria-hidden="true">
+            <li class="review">
+              <div class="review-head">
+                <span class="review-avatar" aria-hidden="true">NC</span>
+                <div>
+                  <p class="review-name">Nome do cliente</p>
+                  <p class="review-meta">Local Guide · 10 avaliações · 3 fotos</p>
+                </div>
+              </div>
+              <p class="review-text">“Aqui entra o texto de uma avaliação real do Google, do jeito que o cliente escreveu. Textos longos são cortados depois de sete linhas, com reticências no final, para todos os cartões ficarem do mesmo tamanho na fileira que passa pela tela…”</p>
+              <div class="review-foot">
+                <svg class="stars" viewBox="0 0 100 20" role="img" aria-label="5 de 5 estrelas"><use href="#i-stars"/></svg>
+                <span>há 2 meses · Google</span>
+              </div>
+            </li>
+            <li class="review">
+              <div class="review-head">
+                <span class="review-avatar" aria-hidden="true">NC</span>
+                <div>
+                  <p class="review-name">Nome do cliente</p>
+                  <p class="review-meta">Local Guide · 10 avaliações · 3 fotos</p>
+                </div>
+              </div>
+              <p class="review-text">“Aqui entra o texto de uma avaliação real do Google, do jeito que o cliente escreveu. Textos longos são cortados depois de sete linhas, com reticências no final, para todos os cartões ficarem do mesmo tamanho na fileira que passa pela tela…”</p>
+              <div class="review-foot">
+                <svg class="stars" viewBox="0 0 100 20" role="img" aria-label="5 de 5 estrelas"><use href="#i-stars"/></svg>
+                <span>há 2 meses · Google</span>
+              </div>
+            </li>
+            <li class="review">
+              <div class="review-head">
+                <span class="review-avatar" aria-hidden="true">NC</span>
+                <div>
+                  <p class="review-name">Nome do cliente</p>
+                  <p class="review-meta">Local Guide · 10 avaliações · 3 fotos</p>
+                </div>
+              </div>
+              <p class="review-text">“Aqui entra o texto de uma avaliação real do Google, do jeito que o cliente escreveu. Textos longos são cortados depois de sete linhas, com reticências no final, para todos os cartões ficarem do mesmo tamanho na fileira que passa pela tela…”</p>
+              <div class="review-foot">
+                <svg class="stars" viewBox="0 0 100 20" role="img" aria-label="5 de 5 estrelas"><use href="#i-stars"/></svg>
+                <span>há 2 meses · Google</span>
+              </div>
+            </li>
+            <li class="review">
+              <div class="review-head">
+                <span class="review-avatar" aria-hidden="true">NC</span>
+                <div>
+                  <p class="review-name">Nome do cliente</p>
+                  <p class="review-meta">Local Guide · 10 avaliações · 3 fotos</p>
+                </div>
+              </div>
+              <p class="review-text">“Aqui entra o texto de uma avaliação real do Google, do jeito que o cliente escreveu. Textos longos são cortados depois de sete linhas, com reticências no final, para todos os cartões ficarem do mesmo tamanho na fileira que passa pela tela…”</p>
+              <div class="review-foot">
+                <svg class="stars" viewBox="0 0 100 20" role="img" aria-label="5 de 5 estrelas"><use href="#i-stars"/></svg>
+                <span>há 2 meses · Google</span>
+              </div>
+            </li>
+            <li class="review">
+              <div class="review-head">
+                <span class="review-avatar" aria-hidden="true">NC</span>
+                <div>
+                  <p class="review-name">Nome do cliente</p>
+                  <p class="review-meta">Local Guide · 10 avaliações · 3 fotos</p>
+                </div>
+              </div>
+              <p class="review-text">“Aqui entra o texto de uma avaliação real do Google, do jeito que o cliente escreveu. Textos longos são cortados depois de sete linhas, com reticências no final, para todos os cartões ficarem do mesmo tamanho na fileira que passa pela tela…”</p>
+              <div class="review-foot">
+                <svg class="stars" viewBox="0 0 100 20" role="img" aria-label="5 de 5 estrelas"><use href="#i-stars"/></svg>
+                <span>há 2 meses · Google</span>
+              </div>
+            </li>
+            <li class="review">
+              <div class="review-head">
+                <span class="review-avatar" aria-hidden="true">NC</span>
+                <div>
+                  <p class="review-name">Nome do cliente</p>
+                  <p class="review-meta">Local Guide · 10 avaliações · 3 fotos</p>
+                </div>
+              </div>
+              <p class="review-text">“Aqui entra o texto de uma avaliação real do Google, do jeito que o cliente escreveu. Textos longos são cortados depois de sete linhas, com reticências no final, para todos os cartões ficarem do mesmo tamanho na fileira que passa pela tela…”</p>
+              <div class="review-foot">
+                <svg class="stars" viewBox="0 0 100 20" role="img" aria-label="5 de 5 estrelas"><use href="#i-stars"/></svg>
+                <span>há 2 meses · Google</span>
+              </div>
+            </li>
+          </ul>
         </div>
-        <ul class="reviews-list" data-carousel-track>
-            <li class="review">
-              <div class="review-head">
-                <span class="review-avatar" aria-hidden="true">NC</span>
-                <div>
-                  <p class="review-name">Nome do cliente</p>
-                  <p class="review-meta">Local Guide · 10 avaliações · 3 fotos</p>
-                </div>
-              </div>
-              <p class="review-text">“Aqui entra o texto de uma avaliação real do Google, do jeito que o cliente escreveu. Textos longos são cortados depois de sete linhas, com reticências no final, para todos os cartões ficarem do mesmo tamanho na fileira que passa pela tela…”</p>
-              <div class="review-foot">
-                <svg class="stars" viewBox="0 0 100 20" role="img" aria-label="5 de 5 estrelas"><use href="#i-stars"/></svg>
-                <span>há 2 meses · Google</span>
-              </div>
-            </li>
-            <li class="review">
-              <div class="review-head">
-                <span class="review-avatar" aria-hidden="true">NC</span>
-                <div>
-                  <p class="review-name">Nome do cliente</p>
-                  <p class="review-meta">Local Guide · 10 avaliações · 3 fotos</p>
-                </div>
-              </div>
-              <p class="review-text">“Aqui entra o texto de uma avaliação real do Google, do jeito que o cliente escreveu. Textos longos são cortados depois de sete linhas, com reticências no final, para todos os cartões ficarem do mesmo tamanho na fileira que passa pela tela…”</p>
-              <div class="review-foot">
-                <svg class="stars" viewBox="0 0 100 20" role="img" aria-label="5 de 5 estrelas"><use href="#i-stars"/></svg>
-                <span>há 2 meses · Google</span>
-              </div>
-            </li>
-            <li class="review">
-              <div class="review-head">
-                <span class="review-avatar" aria-hidden="true">NC</span>
-                <div>
-                  <p class="review-name">Nome do cliente</p>
-                  <p class="review-meta">Local Guide · 10 avaliações · 3 fotos</p>
-                </div>
-              </div>
-              <p class="review-text">“Aqui entra o texto de uma avaliação real do Google, do jeito que o cliente escreveu. Textos longos são cortados depois de sete linhas, com reticências no final, para todos os cartões ficarem do mesmo tamanho na fileira que passa pela tela…”</p>
-              <div class="review-foot">
-                <svg class="stars" viewBox="0 0 100 20" role="img" aria-label="5 de 5 estrelas"><use href="#i-stars"/></svg>
-                <span>há 2 meses · Google</span>
-              </div>
-            </li>
-            <li class="review">
-              <div class="review-head">
-                <span class="review-avatar" aria-hidden="true">NC</span>
-                <div>
-                  <p class="review-name">Nome do cliente</p>
-                  <p class="review-meta">Local Guide · 10 avaliações · 3 fotos</p>
-                </div>
-              </div>
-              <p class="review-text">“Aqui entra o texto de uma avaliação real do Google, do jeito que o cliente escreveu. Textos longos são cortados depois de sete linhas, com reticências no final, para todos os cartões ficarem do mesmo tamanho na fileira que passa pela tela…”</p>
-              <div class="review-foot">
-                <svg class="stars" viewBox="0 0 100 20" role="img" aria-label="5 de 5 estrelas"><use href="#i-stars"/></svg>
-                <span>há 2 meses · Google</span>
-              </div>
-            </li>
-            <li class="review">
-              <div class="review-head">
-                <span class="review-avatar" aria-hidden="true">NC</span>
-                <div>
-                  <p class="review-name">Nome do cliente</p>
-                  <p class="review-meta">Local Guide · 10 avaliações · 3 fotos</p>
-                </div>
-              </div>
-              <p class="review-text">“Aqui entra o texto de uma avaliação real do Google, do jeito que o cliente escreveu. Textos longos são cortados depois de sete linhas, com reticências no final, para todos os cartões ficarem do mesmo tamanho na fileira que passa pela tela…”</p>
-              <div class="review-foot">
-                <svg class="stars" viewBox="0 0 100 20" role="img" aria-label="5 de 5 estrelas"><use href="#i-stars"/></svg>
-                <span>há 2 meses · Google</span>
-              </div>
-            </li>
-            <li class="review">
-              <div class="review-head">
-                <span class="review-avatar" aria-hidden="true">NC</span>
-                <div>
-                  <p class="review-name">Nome do cliente</p>
-                  <p class="review-meta">Local Guide · 10 avaliações · 3 fotos</p>
-                </div>
-              </div>
-              <p class="review-text">“Aqui entra o texto de uma avaliação real do Google, do jeito que o cliente escreveu. Textos longos são cortados depois de sete linhas, com reticências no final, para todos os cartões ficarem do mesmo tamanho na fileira que passa pela tela…”</p>
-              <div class="review-foot">
-                <svg class="stars" viewBox="0 0 100 20" role="img" aria-label="5 de 5 estrelas"><use href="#i-stars"/></svg>
-                <span>há 2 meses · Google</span>
-              </div>
-            </li>
-        </ul>
       </div>
     </section>
 
@@ -969,7 +1052,17 @@
       </div>
 
       <h2 id="rodape-titulo" class="footer-title">Seu lazer em boas mãos. Fale com a Belcor:</h2>
-      <a class="footer-phone" href="tel:+5515988240116" aria-label="Ligar para (15) 98824-0116">(15) 98824-0116</a>
+      <!-- CONFIRMAR COM O DONO: os dois usam o mesmo número. Se houver telefone fixo, troque o segundo (texto e tel:). -->
+      <div class="footer-phones">
+        <a class="footer-phone" href="https://wa.me/5515988240116" target="_blank" rel="noopener">
+          <span class="fp-number">(15) 98824-0116</span>
+          <span class="fp-label"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg> Chamar no WhatsApp</span>
+        </a>
+        <a class="footer-phone" href="tel:+5515988240116">
+          <span class="fp-number">(15) 98824-0116</span>
+          <span class="fp-label"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 3.5h2.6l1.5 4-2 1.4a12 12 0 0 0 6.4 6.4l1.4-2 4 1.5v2.6a2 2 0 0 1-2.2 2A17 17 0 0 1 4.6 5.7a2 2 0 0 1 2-2.2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg> Ligar</span>
+        </a>
+      </div>
 
       <!-- As fotos provisórias são do Unsplash (lista no README). -->
       <div class="footer-meta">
@@ -1010,6 +1103,6 @@
     <symbol id="i-stars" viewBox="0 0 100 20"><use href="#i-star" x="0" width="20" height="20"/><use href="#i-star" x="20" width="20" height="20"/><use href="#i-star" x="40" width="20" height="20"/><use href="#i-star" x="60" width="20" height="20"/><use href="#i-star" x="80" width="20" height="20"/></symbol>
   </svg>
 
-  <script src="assets/js/main.js?v=5" defer></script>
+  <script src="assets/js/main.js?v=6" defer></script>
 </body>
 </html>
