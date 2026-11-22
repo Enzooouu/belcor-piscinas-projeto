@@ -267,7 +267,9 @@
       originals.forEach(el => track.append(clone(el)));
       const measure = () => { setWidth = originals[0].offsetLeft - track.children[0].offsetLeft; };
       measure();
-      track.scrollLeft = setWidth;
+      // começa com a primeira obra original no centro
+      const centerOn = (el) => { track.scrollLeft = el.offsetLeft - (track.clientWidth - el.offsetWidth) / 2; };
+      centerOn(originals[0]);
       const wrap = () => {
         if (track.scrollLeft < setWidth * 0.5) track.scrollLeft += setWidth;
         else if (track.scrollLeft > setWidth * 1.5) track.scrollLeft -= setWidth;
@@ -276,13 +278,13 @@
       track.addEventListener('scroll', () => { clearTimeout(t); t = setTimeout(wrap, 140); }, { passive: true });
       window.addEventListener('resize', () => { const k = setWidth ? track.scrollLeft / setWidth : 1; measure(); track.scrollLeft = setWidth * k; });
     }
-    // marca como destaque a obra que está na frente (a mais próxima da margem esquerda)
+    // marca como destaque a obra que está no centro da fileira
     let raf = 0;
     const markActive = () => {
       raf = 0;
-      const left = track.getBoundingClientRect().left + parseFloat(getComputedStyle(track).paddingLeft);
+      const r = track.getBoundingClientRect(); const mid = r.left + r.width / 2;
       let best = null, bestD = Infinity;
-      Array.from(track.children).forEach(el => { const d = Math.abs(el.getBoundingClientRect().left - left); if (d < bestD) { bestD = d; best = el; } });
+      Array.from(track.children).forEach(el => { const b = el.getBoundingClientRect(); const d = Math.abs(b.left + b.width / 2 - mid); if (d < bestD) { bestD = d; best = el; } });
       Array.from(track.children).forEach(el => el.classList.toggle('is-active', el === best));
     };
     track.addEventListener('scroll', () => { if (!raf) raf = requestAnimationFrame(markActive); }, { passive: true });

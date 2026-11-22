@@ -474,7 +474,7 @@ button, input { font: inherit; color: inherit; }
    3B. OBRAS DA BELCOR — fileira de fotos que desliza para o lado
    ========================================================================= */
 .gallery .wrap { padding-top: clamp(56px, 6vw, 104px); padding-bottom: 28px; }
-@media (min-width: 900px) { .gallery-track { grid-auto-columns: 300px; } }
+@media (min-width: 900px) { .gallery .wrap { padding-top: clamp(56px, 5vw, 80px); } }
 .gallery-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; }
 .gallery-head .lead { max-width: 34ch; }
 
@@ -494,20 +494,21 @@ button, input { font: inherit; color: inherit; }
 
 /* trilho deslizante: começa na margem da página e corre até a borda da tela */
 .gallery-track {
-  display: grid; grid-auto-flow: column; grid-auto-columns: var(--col, min(78vw, 360px)); gap: 12px;
+  display: grid; grid-auto-flow: column; grid-auto-columns: var(--col); gap: 12px;
   overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scrollbar-width: none;
   padding: 0 var(--pad-x) clamp(56px, 6vw, 96px); scroll-padding-inline: var(--pad-x);
 }
 .gallery-track::-webkit-scrollbar { display: none; }
-.gallery-item { scroll-snap-align: start; align-self: start; }
-/* a obra da frente fica em destaque: mais alta e nítida; as próximas mais baixas e apagadas, como uma fila.
+.gallery-item { scroll-snap-align: center; }
+/* a obra do centro fica em destaque: maior, nítida e com legenda; as dos lados ficam mais baixas e apagadas.
    Todas têm a mesma largura, então os espaços entre elas ficam sempre iguais. */
-.gallery { --col: min(78vw, 360px); }
-@media (min-width: 900px) { .gallery { --col: 300px; } }
-.gallery-track { align-items: center; }
-.js .gallery-item img, .js .gallery-insta { aspect-ratio: auto; height: calc(var(--col) * 1); transition: height .6s var(--ease-out), opacity .6s ease; }
-.js .gallery-item.is-active img, .js .gallery-item.is-active .gallery-insta { height: calc(var(--col) * 1.25); }
-.js .gallery-item:not(.is-active) img, .js .gallery-item:not(.is-active) .gallery-insta { opacity: .45; }
+.gallery { --col: 84vw; --tall: calc(var(--col) * .8); --short: calc(var(--col) * .66); }
+@media (min-width: 640px) { .gallery { --col: min(62vw, 520px); } }
+@media (min-width: 900px) { .gallery { --col: min(40vw, 580px); --tall: calc(var(--col) * .72); --short: calc(var(--col) * .58); } }
+.gallery-track { align-items: center; position: relative; }
+.js .gallery-item img, .js .gallery-insta { aspect-ratio: auto; height: var(--short); transition: height .6s var(--ease-out), opacity .6s ease; }
+.js .gallery-item.is-active img, .js .gallery-item.is-active .gallery-insta { height: var(--tall); }
+.js .gallery-item:not(.is-active) img, .js .gallery-item:not(.is-active) .gallery-insta { opacity: .5; }
 .js .gallery-item:not(.is-active) figcaption { opacity: 0; }
 .gallery-item figcaption { transition: opacity .4s ease; }
 .gallery-item figure { margin: 0; display: grid; gap: 10px; }
