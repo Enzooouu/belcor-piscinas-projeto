@@ -158,6 +158,16 @@
     }
   };
   if (form) {
+    // tocar de novo numa opção já marcada desmarca (radio normal não deixa)
+    const remember = (e) => { const lab = e.target.closest('.chip'); if (lab) { const i = $('input', lab); i.dataset.was = String(i.checked); } };
+    form.addEventListener('pointerdown', remember);
+    form.addEventListener('keydown', (e) => { if (e.key === ' ' && e.target.matches('.chip input')) e.target.dataset.was = String(e.target.checked); });
+    form.addEventListener('click', (e) => {
+      const i = e.target;
+      if (!i.matches || !i.matches('.chip input[type=radio]')) return;
+      if (i.dataset.was === 'true') { i.checked = false; updateQuote(); }
+      i.dataset.was = 'false';
+    });
     form.addEventListener('input', updateQuote);
     form.addEventListener('change', updateQuote);
     form.addEventListener('submit', (e) => { e.preventDefault(); sendBtn && sendBtn.click(); });
@@ -266,6 +276,18 @@
       track.addEventListener('scroll', () => { clearTimeout(t); t = setTimeout(wrap, 140); }, { passive: true });
       window.addEventListener('resize', () => { const k = setWidth ? track.scrollLeft / setWidth : 1; measure(); track.scrollLeft = setWidth * k; });
     }
+    // marca como destaque a obra que está na frente (a mais próxima da margem esquerda)
+    let raf = 0;
+    const markActive = () => {
+      raf = 0;
+      const left = track.getBoundingClientRect().left + parseFloat(getComputedStyle(track).paddingLeft);
+      let best = null, bestD = Infinity;
+      Array.from(track.children).forEach(el => { const d = Math.abs(el.getBoundingClientRect().left - left); if (d < bestD) { bestD = d; best = el; } });
+      Array.from(track.children).forEach(el => el.classList.toggle('is-active', el === best));
+    };
+    track.addEventListener('scroll', () => { if (!raf) raf = requestAnimationFrame(markActive); }, { passive: true });
+    window.addEventListener('resize', () => requestAnimationFrame(markActive));
+    markActive();
     const step = () => { const item = track.children[0]; return item ? item.getBoundingClientRect().width + GAP : track.clientWidth * 0.8; };
     const go = (dir) => track.scrollBy({ left: dir * step(), behavior: reduceMotion ? 'auto' : 'smooth' });
     const update = () => {
