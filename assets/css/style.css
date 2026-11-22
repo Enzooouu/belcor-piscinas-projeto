@@ -779,6 +779,51 @@ button, input { font: inherit; color: inherit; }
 }
 
 /* =========================================================================
+   7B. PERGUNTAS FREQUENTES — sanfona: só a pergunta aparece, a resposta abre ao tocar
+   ========================================================================= */
+.faq .wrap { padding-top: clamp(64px, 6vw, 112px); }
+.faq-grid { display: grid; gap: 28px; }
+.faq-intro .lead { max-width: 30ch; }
+.faq-list { display: grid; gap: var(--gap); }
+.faq-item {
+  background: var(--white);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  transition: background-color var(--dur) ease;
+}
+.faq-item[open] { background: var(--navy); color: #fff; }
+.faq-item summary {
+  list-style: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  min-height: 64px; padding: 14px 20px;
+  font-size: 1.125rem; font-weight: 600; letter-spacing: -0.015em; line-height: 1.3;
+  -webkit-tap-highlight-color: transparent;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+/* seta igual à da sanfona "Do contato à entrega" */
+.faq-item summary::after {
+  content: ""; width: 12px; height: 12px; flex: none;
+  border-right: 2.5px solid currentColor; border-bottom: 2.5px solid currentColor; border-radius: 0 0 3px 0;
+  transform: rotate(45deg) translateY(-4px);
+  transition: transform var(--dur) var(--ease-out);
+}
+.faq-item[open] summary::after { transform: rotate(-135deg) translateY(-2px); }
+.faq-item summary:hover { color: var(--royal); }
+.faq-item[open] summary:hover { color: var(--cyan-2); }
+.faq-item summary:focus-visible { outline: 3px solid var(--royal); outline-offset: -3px; border-radius: var(--r-lg); }
+.faq-answer { padding: 0 20px 20px; display: grid; gap: 10px; color: #dbe8f1; max-width: 62ch; }
+.faq-item[open] .faq-answer { animation: faqIn .35s var(--ease-out); }
+@keyframes faqIn { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
+
+@media (min-width: 900px) {
+  .faq-grid { grid-template-columns: repeat(12, 1fr); column-gap: 24px; align-items: start; }
+  .faq-intro { grid-column: 1 / span 4; position: sticky; top: 104px; }
+  .faq-list { grid-column: 6 / -1; }
+  .faq-item summary { padding: 16px 24px; font-size: var(--step-lead); }
+  .faq-answer { padding: 0 24px 24px; }
+}
+
+/* =========================================================================
    8. ÁREA ATENDIDA — sobre o fundo da página, sem cartão
    ========================================================================= */
 .place { margin-top: var(--gap); background: var(--tint); }

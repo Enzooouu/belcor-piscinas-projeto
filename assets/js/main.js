@@ -230,6 +230,12 @@
     });
   }
 
+  /* ---------- Perguntas frequentes: abre uma de cada vez ---------- */
+  const faqs = $$('[data-faq]');
+  faqs.forEach(d => d.addEventListener('toggle', () => {
+    if (d.open) faqs.forEach(o => { if (o !== d) o.open = false; });
+  }));
+
   /* ---------- WhatsApp fixo: some enquanto o botão do topo está visível ---------- */
   const waFloat = $('.wa-float');
   const heroCta = $('.hero-actions');
